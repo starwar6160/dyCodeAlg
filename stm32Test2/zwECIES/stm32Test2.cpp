@@ -157,20 +157,23 @@ void myJclmsTest20150305()
 	JcLockDelete(handle);
 }
 
+//20150409.周伟.为孙工做了一个锁具开锁整个流程的标准测试向量
 void myJclmsTest20150306STM32Demo()
 {
 	//基本条件
-	const char *atmno="atm10455761";
-	const char *lockno="lock14771509";
-	const char *psk="PSKDEMO728";
+	const char *atmno="ATM20150409";
+	const char *lockno="LOCK134200";
+	const char *psk="4943e20afc76c3bd971be3112339b63294b68857e77e1a91340624b1b005935e";
 	//此处是初始闭锁码,生成闭锁码和初始闭锁码的方式类似,初始闭锁码不需要时间和closecode输入，所以输入0
 	int initCloseCode=embSrvGenDyCode(JCCMD_INIT_CLOSECODE,0,0,atmno,lockno,psk);
+	printf("初始闭锁码=\t%d\n", initCloseCode);
 
 	//////////////////////////////////////////////////////////////////////////
 	//从3个基本条件(ATM编号，锁具编号，PSK(也就是激活信息经过解密之后的内容)
 	//和UTC时间秒数，初始闭锁码作为输入，密码服务器生成第一开锁码作为输出
 	time_t curTime=time(NULL);
 	curTime=1425711000;	//20150309调试临时修改固定时间值便于调试
+	printf("固定的动态码生成时间，为了调试方便比较=\t%d\n", curTime);
 	int pass1DyCode=embSrvGenDyCode(JCCMD_CCB_DYPASS1,curTime,initCloseCode,atmno,lockno,psk);
 	printf("第一开锁码=\t%d\n", pass1DyCode);
 	//锁具验证第一开锁码
@@ -196,8 +199,8 @@ void myJclmsTest20150306STM32Demo()
 
 	//////////////////////////////////////////////////////////////////////////
 	//密码服务器生成第二开锁码，验证码作为生成要素
-	int pass2DyCode=embSrvGenDyCode(JCCMD_CCB_DYPASS2,curTime,VerifyDyCode,"atm10455761",
-		"lock14771509","PSKDEMO728");
+	int pass2DyCode=embSrvGenDyCode(JCCMD_CCB_DYPASS2,curTime,VerifyDyCode,atmno,
+		lockno,psk);
 	printf("第二开锁码=\t%d\n", pass2DyCode);
 	//锁具验证第二开锁码
 	printf("验证第二开锁码开始\n");
@@ -252,13 +255,13 @@ int main(int argc, char * argv[])
 	//test4CCB3DES_ECB_EDE2();
 
 	//////////////////////////////////////////////////////////////////////////
-	myECIESTest305ForArm();
-	Sleep(2000);
-	myECIESTest305ForArm();
+	//myECIESTest305ForArm();
+	//Sleep(2000);
+	//myECIESTest305ForArm();
 
 	//////////////////////////////////////////////////////////////////////////
 	//myJclmsTest20150305();
-	//myJclmsTest20150306STM32Demo();
+	myJclmsTest20150306STM32Demo();
 	//printf("%s\n",zw3desTest311("0123456789ABCDEF").c_str());
 
 
