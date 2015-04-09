@@ -161,9 +161,9 @@ void myJclmsTest20150305()
 void myJclmsTest20150306STM32Demo()
 {
 	//基本条件
-	const char *atmno="ATM20150409";
-	const char *lockno="LOCK134200";
-	const char *psk="4943e20afc76c3bd971be3112339b63294b68857e77e1a91340624b1b005935e";
+	const char *atmno="atm10455761";
+	const char *lockno="lock14771509";
+	const char *psk="1E3CA43C32EE402BD5AA7B6B89110021801769FDB530DBF3C1AFC96BD8C3EC9F";
 	//此处是初始闭锁码,生成闭锁码和初始闭锁码的方式类似,初始闭锁码不需要时间和closecode输入，所以输入0
 	int initCloseCode=embSrvGenDyCode(JCCMD_INIT_CLOSECODE,0,0,atmno,lockno,psk);
 	printf("初始闭锁码=\t%d\n", initCloseCode);
