@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="源文件\zwMiraclMini">
+      <UniqueIdentifier>{74bf4b55-63f6-467b-bdfa-73f6481cbdb4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -43,6 +46,54 @@
     </ClCompile>
     <ClCompile Include="..\jclmsCCB2014\zwECIES\zwEcies529.cpp">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\stm32Test2\zwMiracl\mraes.c">
+      <Filter>源文件\zwMiraclMini</Filter>
+    </ClCompile>
+    <ClCompile Include="..\stm32Test2\zwMiracl\mralloc.c">
+      <Filter>源文件\zwMiraclMini</Filter>
+    </ClCompile>
+    <ClCompile Include="..\stm32Test2\zwMiracl\mrarth0.c">
+      <Filter>源文件\zwMiraclMini</Filter>
+    </ClCompile>
+    <ClCompile Include="..\stm32Test2\zwMiracl\mrarth1.c">
+      <Filter>源文件\zwMiraclMini</Filter>
+    </ClCompile>
+    <ClCompile Include="..\stm32Test2\zwMiracl\mrarth2.c">
+      <Filter>源文件\zwMiraclMini</Filter>
+    </ClCompile>
+    <ClCompile Include="..\stm32Test2\zwMiracl\mrarth3.c">
+      <Filter>源文件\zwMiraclMini</Filter>
+    </ClCompile>
+    <ClCompile Include="..\stm32Test2\zwMiracl\mrbits.c">
+      <Filter>源文件\zwMiraclMini</Filter>
+    </ClCompile>
+    <ClCompile Include="..\stm32Test2\zwMiracl\mrcore.c">
+      <Filter>源文件\zwMiraclMini</Filter>
+    </ClCompile>
+    <ClCompile Include="..\stm32Test2\zwMiracl\mrcurve.c">
+      <Filter>源文件\zwMiraclMini</Filter>
+    </ClCompile>
+    <ClCompile Include="..\stm32Test2\zwMiracl\mrjack.c">
+      <Filter>源文件\zwMiraclMini</Filter>
+    </ClCompile>
+    <ClCompile Include="..\stm32Test2\zwMiracl\mrlucas.c">
+      <Filter>源文件\zwMiraclMini</Filter>
+    </ClCompile>
+    <ClCompile Include="..\stm32Test2\zwMiracl\mrmonty.c">
+      <Filter>源文件\zwMiraclMini</Filter>
+    </ClCompile>
+    <ClCompile Include="..\stm32Test2\zwMiracl\mrshs256.c">
+      <Filter>源文件\zwMiraclMini</Filter>
+    </ClCompile>
+    <ClCompile Include="..\stm32Test2\zwMiracl\mrsroot.c">
+      <Filter>源文件\zwMiraclMini</Filter>
+    </ClCompile>
+    <ClCompile Include="..\stm32Test2\zwMiracl\mrstrong.c">
+      <Filter>源文件\zwMiraclMini</Filter>
+    </ClCompile>
+    <ClCompile Include="..\stm32Test2\zwMiracl\mrxgcd.c">
+      <Filter>源文件\zwMiraclMini</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

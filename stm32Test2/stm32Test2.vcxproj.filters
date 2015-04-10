@@ -30,24 +30,6 @@
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="zwECIES\ecdh.c">
-      <Filter>源文件\zwECIESCopy</Filter>
-    </ClCompile>
-    <ClCompile Include="zwECIES\octet.c">
-      <Filter>源文件\zwECIESCopy</Filter>
-    </ClCompile>
-    <ClCompile Include="zwECIES\sha2.c">
-      <Filter>源文件\zwECIESCopy</Filter>
-    </ClCompile>
-    <ClCompile Include="zwECIES\sm3_1407.c">
-      <Filter>源文件\zwECIESCopy</Filter>
-    </ClCompile>
-    <ClCompile Include="zwECIES\sm3hmac_1407.cpp">
-      <Filter>源文件\zwECIESCopy</Filter>
-    </ClCompile>
-    <ClCompile Include="zwECIES\zwRand201406.cpp">
-      <Filter>源文件\zwECIESCopy</Filter>
-    </ClCompile>
     <ClCompile Include="zwECIES\stm32Test2.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -112,6 +94,27 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\jclmsCCB2014\zwECIES\zwEcies529.cpp">
+      <Filter>源文件\zwECIESCopy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\jclmsCCB2014\zwECIES\zwRand201406.cpp">
+      <Filter>源文件\zwECIESCopy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\jclmsCCB2014\zwECIES\sm3hmac_1407.cpp">
+      <Filter>源文件\zwECIESCopy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\jclmsCCB2014\zwECIES\sm3_1407.c">
+      <Filter>源文件\zwECIESCopy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\jclmsCCB2014\zwECIES\ecdh.c">
+      <Filter>源文件\zwECIESCopy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\jclmsCCB2014\zwECIES\octet.c">
+      <Filter>源文件\zwECIESCopy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\jclmsCCB2014\zwECIES\sha2.c">
+      <Filter>源文件\zwECIESCopy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\jclmsCCB2014\src\zwHtons.c">
       <Filter>源文件\zwECIESCopy</Filter>
     </ClCompile>
   </ItemGroup>
