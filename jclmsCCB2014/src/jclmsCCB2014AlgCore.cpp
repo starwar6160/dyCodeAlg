@@ -192,7 +192,9 @@ void myGetInitCloseCodeVarItem(int *mdatetime, int *mvalidity, int *mclosecode)
 	//所以时间值定死为1400M秒，或者其实哪个过去的方便人识别的时间点都可以；
 	//这些参数后续要改为可以配置的，起码要可以通过函数调用来配置，最好能
 	//使用配置文件来配置
-	*mdatetime = 1400*ZWMEGA;
+	//*mdatetime = 1400*ZWMEGA;
+	//20150410.1721.建行现在要求初始闭锁码在大约1分钟以后就每次都不一样了
+	*mdatetime=myGetNormalTime(time(NULL),30);
 	*mvalidity = 1000;
 	*mclosecode = 10000000;
 }
@@ -560,7 +562,7 @@ JCMATCH JCLMSCCB2014_API JcLockReverseVerifyDynaCode(const int handle,
 	//zwTrace1027 tmr(__FUNCTION__"1");
 	ZWDBG_WARN("%s dstCode=%d\n",__FUNCTION__,dstCode);
 	JcLockDebugPrint(handle);
-	zwJcLockDumpJCINPUT(handle);
+	//zwJcLockDumpJCINPUT(handle);
 	JCINPUT *jcp = (JCINPUT *) handle;
 	const int MIN_OF_HOUR = 60;	//一小时的分钟数
 	JCMATCH jcoff;

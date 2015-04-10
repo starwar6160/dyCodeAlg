@@ -192,9 +192,7 @@ void myJclmsTest20150306STM32Demo()
 	//密码服务器验证验证码
 	printf("验证验证码开始\n");
 	time_t vercodeMatchTime=embSrvReverseDyCode(JCCMD_CCB_LOCK_VERCODE,VerifyDyCode,pass1DyCode, 
-		//time(NULL),
-		curTime,
-		atmno,lockno,psk);
+		curTime,atmno,lockno,psk);
 	printf("验证验证码结束,时间是%u\n",static_cast<uint32_t>(vercodeMatchTime));
 
 	//////////////////////////////////////////////////////////////////////////
