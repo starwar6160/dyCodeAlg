@@ -188,13 +188,22 @@ void myGetInitCloseCodeVarItem(int *mdatetime, int *mvalidity, int *mclosecode)
 	if (NULL == mdatetime || NULL == mvalidity || NULL == mclosecode) {
 		return;
 	}
+	assert((*mdatetime)>(1400*ZWMEGA));
 	//20141113.1748.经过前两天的讨论，锁具初始闭锁码不能因为时间变化而变化
 	//所以时间值定死为1400M秒，或者其实哪个过去的方便人识别的时间点都可以；
 	//这些参数后续要改为可以配置的，起码要可以通过函数调用来配置，最好能
 	//使用配置文件来配置
-	//*mdatetime = 1400*ZWMEGA;
+#ifdef _DEBUG
+	//调试时为了便于比较，还是使用固定值的时间
+	*mdatetime = 1400*ZWMEGA;
+	//*mdatetime=myGetNormalTime(time(NULL),3600*24);
+#else
 	//20150410.1721.建行现在要求初始闭锁码在大约1分钟以后就每次都不一样了
-	*mdatetime=myGetNormalTime(time(NULL),30);
+	//所以按照30秒取整
+	//*mdatetime=myGetNormalTime(time(NULL),30);
+	//无时间硬件的ARM用
+	*mdatetime=myGetNormalTime(*mdatetime,30);
+#endif
 	*mvalidity = 1000;
 	*mclosecode = 10000000;
 }
@@ -489,8 +498,10 @@ int zwJcLockGetDynaCode(const int handle)
 {
 	//zwTrace1027 tmr(__FUNCTION__"1");
 	ZWDBG_INFO("%s\n",__FUNCTION__);
+#ifdef _DEBUG
 	JcLockDebugPrint(handle);
 	zwJcLockDumpJCINPUT(handle);
+#endif	//_DEBUG
 	const JCINPUT *lock = (const JCINPUT *)handle;
 	SM3 sm3;
 	char outHmac[ZW_SM3_DGST_SIZE];
@@ -561,7 +572,9 @@ JCMATCH JCLMSCCB2014_API JcLockReverseVerifyDynaCode(const int handle,
 {
 	//zwTrace1027 tmr(__FUNCTION__"1");
 	ZWDBG_WARN("%s dstCode=%d\n",__FUNCTION__,dstCode);
+#ifdef _DEBUG
 	JcLockDebugPrint(handle);
+#endif	//_DEBUG
 	//zwJcLockDumpJCINPUT(handle);
 	JCINPUT *jcp = (JCINPUT *) handle;
 	const int MIN_OF_HOUR = 60;	//一小时的分钟数

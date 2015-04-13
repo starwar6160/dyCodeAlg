@@ -173,6 +173,7 @@ void myJclmsTest20150306STM32Demo()
 	//和UTC时间秒数，初始闭锁码作为输入，密码服务器生成第一开锁码作为输出
 	time_t curTime=time(NULL);
 	curTime=1425711000;	//20150309调试临时修改固定时间值便于调试
+	//curTime=1425711000-330;
 	printf("固定的动态码生成时间，为了调试方便比较=\t%d\n", curTime);
 	int pass1DyCode=embSrvGenDyCode(JCCMD_CCB_DYPASS1,curTime,initCloseCode,atmno,lockno,psk);
 	printf("第一开锁码=\t%d\n", pass1DyCode);
@@ -185,10 +186,17 @@ void myJclmsTest20150306STM32Demo()
 	printf("验证第一开锁码完毕,时间是%u\n",static_cast<uint32_t>(pass1MatchTime));
 
 	//////////////////////////////////////////////////////////////////////////
+	curTime-=150;
+	//2015/4/13 9:37:22 [星期一] 直接更改时间模拟锁具因故生成超出2.5分钟的验证码
+	//以便反推可以出来有时间结果,便于孙工验证,超出5分钟以上的话一般就直接时间为0
+	//无匹配了
+	//验证码= 65644404	验证验证码结束,时间是1425710670
+	//验证码= 29979085	验证验证码结束,时间是1425711330
 	//锁具生成验证码,第一开锁码作为生成要素,
 	int VerifyDyCode=embSrvGenDyCode(JCCMD_CCB_LOCK_VERCODE,curTime,pass1DyCode,atmno,
 		lockno,psk);
 	printf("验证码=\t%d\n", VerifyDyCode);
+	curTime+=150;
 	//密码服务器验证验证码
 	printf("验证验证码开始\n");
 	time_t vercodeMatchTime=embSrvReverseDyCode(JCCMD_CCB_LOCK_VERCODE,VerifyDyCode,pass1DyCode, 
