@@ -13,6 +13,7 @@
 #ifndef _WIN32
 #define assert
 #endif // _WIN32
+#define _DEBUG414INPUTSTR	//输出被实际运算的所有输入条件的完整调试字符串
 
 #include <string>
 using std::string;
@@ -188,7 +189,7 @@ void myGetInitCloseCodeVarItem(int *mdatetime, int *mvalidity, int *mclosecode)
 	if (NULL == mdatetime || NULL == mvalidity || NULL == mclosecode) {
 		return;
 	}
-	assert((*mdatetime)>(1400*ZWMEGA));
+	assert((*mdatetime)>(1400*ZWMEGA-60));
 	//20141113.1748.经过前两天的讨论，锁具初始闭锁码不能因为时间变化而变化
 	//所以时间值定死为1400M秒，或者其实哪个过去的方便人识别的时间点都可以；
 	//这些参数后续要改为可以配置的，起码要可以通过函数调用来配置，最好能
@@ -502,30 +503,30 @@ int zwJcLockGetDynaCode(const int handle)
 	JcLockDebugPrint(handle);
 	zwJcLockDumpJCINPUT(handle);
 #endif	//_DEBUG
-	const JCINPUT *lock = (const JCINPUT *)handle;
+	const JCINPUT *jcp = (const JCINPUT *)handle;
 	SM3 sm3;
 	char outHmac[ZW_SM3_DGST_SIZE];
 
 	//规格化时间到G_TIMEMOD这么多秒
-	int l_datetime = myGetNormalTime(lock->CodeGenDateTime,
-		lock->SearchTimeStep);
+	int l_datetime = myGetNormalTime(jcp->CodeGenDateTime,
+		jcp->SearchTimeStep);
 	//60*5);        //20140804.1717.应张靖钰的测试需求，暂时改为5分钟取整
 	//有效期和闭锁码需要根据不同情况分别处理
-	int l_validity = lock->Validity;
-	int l_closecode = lock->CloseCode;
+	int l_validity = jcp->Validity;
+	int l_closecode = jcp->CloseCode;
 	//计算初始闭锁码时，采用十天半月大致固定的时间，有效期，闭锁码的值
 	//以便对于特定的锁具和PSK来说，初始闭锁码是一个十天半月内的恒定值
-	if (JCCMD_INIT_CLOSECODE == lock->CmdType) {
+	if (JCCMD_INIT_CLOSECODE == jcp->CmdType) {
 		//l_datetime=myGetNormalTime(time(NULL),ZWMEGA);        //初始闭锁码采用1M秒(大约12天)的取整时间
 		//l_validity=1000;      //初始有效期取一个有效范围内的规整值
 		//l_closecode=1000000;  //初始闭锁码特选一个有效范围内的规整值
 		myGetInitCloseCodeVarItem(&l_datetime, &l_validity,
 			&l_closecode);
 	}
-	if (JCCMD_CCB_CLOSECODE == lock->CmdType) {	//计算真正的闭锁码，采用3个固定条件，外加特定的取整步长的时间，以及固定的有效期和“闭锁码”作为输入
+	if (JCCMD_CCB_CLOSECODE == jcp->CmdType) {	//计算真正的闭锁码，采用3个固定条件，外加特定的取整步长的时间，以及固定的有效期和“闭锁码”作为输入
 		myGetCloseCodeVarItem(&l_datetime, &l_validity, &l_closecode);
 	}
-	JCERROR err = JcLockCheckInput((const int)lock);
+	JCERROR err = JcLockCheckInput((const int)jcp);
 	if (EJC_SUSSESS != err) {
 		return err;
 	}
@@ -533,18 +534,27 @@ int zwJcLockGetDynaCode(const int handle)
 	G_SM3DATA_TRACK=1;
 	SM3_Init(&sm3);
 
+#ifdef _DEBUG414INPUTSTR
+	char myDyCodeStr[256];
+	memset(myDyCodeStr,0,256);
+	sprintf(myDyCodeStr,"1.%s.2.%s.3.%s.4.%u.5.%u.6.%u.7.%u",
+		jcp->AtmNo,jcp->LockNo,jcp->PSK,
+		l_datetime,l_validity,l_closecode,jcp->CmdType);
+	printf("ENCODE.DYCODE REALSTR 20150414:\n%s\n",myDyCodeStr);
+#endif // _DEBUG414INPUTSTR
+
 	//限度是小于14开头的时间(1.4G秒)或者快要超出2048M秒的话就是非法了
 	/////////////////////////////逐个元素进行HASH运算/////////////////////////////////////////////
 	//首先处理固定字段的HASH值输入
-	mySM3Update(&sm3, lock->AtmNo, sizeof(lock->AtmNo));
-	mySM3Update(&sm3, lock->LockNo, sizeof(lock->LockNo));
-	mySM3Update(&sm3, lock->PSK, sizeof(lock->PSK));
+	mySM3Update(&sm3, jcp->AtmNo, sizeof(jcp->AtmNo));
+	mySM3Update(&sm3, jcp->LockNo, sizeof(jcp->LockNo));
+	mySM3Update(&sm3, jcp->PSK, sizeof(jcp->PSK));
 
 	//继续输入各个可变字段的HASH值
 	mySM3Update(&sm3, l_datetime);
 	mySM3Update(&sm3, l_validity);
 	mySM3Update(&sm3, l_closecode);
-	mySM3Update(&sm3, lock->CmdType);
+	mySM3Update(&sm3, jcp->CmdType);
 	//////////////////////////////HASH运算结束////////////////////////////////////////////
 	memset(outHmac, 0, ZWSM3_DGST_LEN);
 	SM3_Final(&sm3, (char *)(outHmac));
@@ -606,6 +616,15 @@ JCMATCH JCLMSCCB2014_API JcLockReverseVerifyDynaCode(const int handle,
 
 	//结束时间，往前推数据结构所指定的一段时间，几分钟到一整天不等
 	int tend = l_datetime - jcp->SearchTimeLength;
+
+#ifdef _DEBUG414INPUTSTR
+	char myDyCodeStr[256];
+	memset(myDyCodeStr,0,256);
+	sprintf(myDyCodeStr,"1.%s.2.%s.3.%s.4.%u.5.%u.6.%u.7.%u",
+		jcp->AtmNo,jcp->LockNo,jcp->PSK,
+		1400*ZWMEGA,0,l_closecode,jcp->CmdType);
+	printf("DECODE.DYCODE REALSTR 20150414:\n%s\n",myDyCodeStr);
+#endif // _DEBUG414INPUTSTR
 
 	for (int tdate = l_datetime; tdate >= tend; tdate -= l_timestep) {			
 		ZWDBG_INFO("%d\t",tdate);	

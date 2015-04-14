@@ -195,7 +195,7 @@ void myJclmsTest20150306STM32Demo()
 	//锁具生成验证码,第一开锁码作为生成要素,
 	int VerifyDyCode=embSrvGenDyCode(JCCMD_CCB_LOCK_VERCODE,curTime,pass1DyCode,atmno,
 		lockno,psk);
-	printf("验证码=\t%d\n", VerifyDyCode);
+	printf("验证码=\t%d\t", VerifyDyCode);
 	curTime+=150;
 	//密码服务器验证验证码
 	printf("验证验证码开始\n");
