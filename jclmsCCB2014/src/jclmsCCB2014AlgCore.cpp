@@ -494,12 +494,56 @@ int JCLMSCCB2014_API JcLockDelete(const int handle)
 	return EJC_SUSSESS;
 }
 
+//把输入条件变成便于观看的调试字符串
+int myInputItems2DebugString(char *outBuf,int outbufLen,
+	const char *atmno,const char *lockno,const char *psk,
+	time_t genTime,int validity,int closeCode,int cmdType)
+{
+	assert(NULL!=outBuf && outbufLen>0);
+	assert(NULL!=atmno && strlen(atmno)>0);
+	assert(NULL!=lockno && strlen(lockno)>0);
+	assert(NULL!=psk && strlen(psk)>0);
+	assert(genTime>1300*ZWMEGA);
+	assert(validity>=0 && validity <(3600*24));
+	assert(cmdType>=0);
+	memset(outBuf,0,outbufLen);
+	char *strCmdType=NULL;
+	switch(cmdType)
+	{
+	case JCCMD_INIT_CLOSECODE:
+			strCmdType="JCCMD_INIT_CLOSECODE";
+			break;
+	case JCCMD_CCB_CLOSECODE:
+		strCmdType="JCCMD_CCB_CLOSECODE";
+		break;
+	case JCCMD_CCB_DYPASS1:
+		strCmdType="JCCMD_CCB_DYPASS1";
+		break;
+	case JCCMD_CCB_LOCK_VERCODE:
+		strCmdType="JCCMD_CCB_LOCK_VERCODE";
+		break;
+	case JCCMD_CCB_DYPASS2:
+		strCmdType="JCCMD_CCB_DYPASS2";
+		break;
+	default:
+		strCmdType="UNKNOWNCMD";
+		break;
+	}	
+	sprintf(outBuf,"CMD:%s.TIME:%I64u.VAL:%d.CLOSE:%d.ATM:%s.LOCK:%s.PSK:%s",
+	strCmdType,genTime,validity,closeCode,
+	atmno,lockno,psk);
+
+	//	cmdType,atmno,lockno,psk,genTime,validity,closeCode);	
+	int retLen=strlen(outBuf);
+	return retLen;
+}
+
 //生成各种类型的动态码
 int zwJcLockGetDynaCode(const int handle)
 {
 	//zwTrace1027 tmr(__FUNCTION__"1");
 	ZWDBG_INFO("%s\n",__FUNCTION__);
-#ifdef _DEBUG
+#ifdef _DEBUG14
 	JcLockDebugPrint(handle);
 	zwJcLockDumpJCINPUT(handle);
 #endif	//_DEBUG
@@ -536,8 +580,8 @@ int zwJcLockGetDynaCode(const int handle)
 
 #ifdef _DEBUG414INPUTSTR
 	char myDyCodeStr[256];
-	memset(myDyCodeStr,0,256);
-	sprintf(myDyCodeStr,"1.%s.2.%s.3.%s.4.%u.5.%u.6.%u.7.%u",
+	//memset(myDyCodeStr,0,256);
+	myInputItems2DebugString(myDyCodeStr,256,
 		jcp->AtmNo,jcp->LockNo,jcp->PSK,
 		l_datetime,l_validity,l_closecode,jcp->CmdType);
 	printf("ENCODE.DYCODE REALSTR 20150414:\n%s\n",myDyCodeStr);
@@ -582,7 +626,7 @@ JCMATCH JCLMSCCB2014_API JcLockReverseVerifyDynaCode(const int handle,
 {
 	//zwTrace1027 tmr(__FUNCTION__"1");
 	ZWDBG_WARN("%s dstCode=%d\n",__FUNCTION__,dstCode);
-#ifdef _DEBUG
+#ifdef _DEBUG14
 	JcLockDebugPrint(handle);
 #endif	//_DEBUG
 	//zwJcLockDumpJCINPUT(handle);
@@ -619,8 +663,8 @@ JCMATCH JCLMSCCB2014_API JcLockReverseVerifyDynaCode(const int handle,
 
 #ifdef _DEBUG414INPUTSTR
 	char myDyCodeStr[256];
-	memset(myDyCodeStr,0,256);
-	sprintf(myDyCodeStr,"1.%s.2.%s.3.%s.4.%u.5.%u.6.%u.7.%u",
+	//memset(myDyCodeStr,0,256);
+	myInputItems2DebugString(myDyCodeStr,256,	
 		jcp->AtmNo,jcp->LockNo,jcp->PSK,
 		1400*ZWMEGA,0,l_closecode,jcp->CmdType);
 	printf("DECODE.DYCODE REALSTR 20150414:\n%s\n",myDyCodeStr);
