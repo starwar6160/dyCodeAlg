@@ -529,7 +529,14 @@ int myInputItems2DebugString(char *outBuf,int outbufLen,
 		strCmdType="UNKNOWNCMD";
 		break;
 	}	
-	sprintf(outBuf,"CMD:%s.TIME:%I64u.VAL:%d.CLOSE:%d.ATM:%s.LOCK:%s.PSK:%s",
+	sprintf(outBuf,
+#ifdef _WIN32
+//windows using %I64u output 64 bit unsigned int,eg:time_t
+		"CMD:%s.TIME:%I64u.VAL:%d.CLOSE:%d.ATM:%s.LOCK:%s.PSK:%s",
+#else
+//Linux/ARM using %llu output 64 bit unsigned int,eg:time_t
+		"CMD:%s.TIME:%llu.VAL:%d.CLOSE:%d.ATM:%s.LOCK:%s.PSK:%s",
+#endif // _WIN32
 	strCmdType,genTime,validity,closeCode,
 	atmno,lockno,psk);
 

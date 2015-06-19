@@ -224,6 +224,27 @@ void myJclmsTest20150306STM32Demo()
 
 
 
+//20150619.周伟.为孙工做了一个密码服务器测试.
+//后来证明是他最近把ARM编译器的优化级别又设置到0，才会出问题的，和去年一样；
+void myJclmsTest20150619STM32Demo()
+{
+	//基本条件
+	const char *atmno="9988";
+	const char *lockno="536934201";
+	const char *psk="1F6A190D05466F879C37CA1A0C4170C990D6ADCE4D2E34679645E8D38D695C4C";
+	int initCloseCode=58934055;
+	printf("初始闭锁码实际使用=\t%d\n", initCloseCode);
+	//////////////////////////////////////////////////////////////////////////
+	//从3个基本条件(ATM编号，锁具编号，PSK(也就是激活信息经过解密之后的内容)
+	//和UTC时间秒数，初始闭锁码作为输入，密码服务器生成第一开锁码作为输出
+	time_t curTime=1434676956;
+	curTime=1434676956;	
+	printf("20150619早上8点49分左右的动态码生成时间=\t%d\n", curTime);
+	int pass1DyCode=embSrvGenDyCode(JCCMD_CCB_DYPASS1,curTime,initCloseCode,atmno,lockno,psk);
+	printf("第一开锁码=\t%d\n", pass1DyCode);
+}
+
+
 
 void test4CCB3DES_ECB_EDE2();
 //把进来的64比特信息转换为64比特无符号整型
@@ -267,7 +288,8 @@ int main(int argc, char * argv[])
 
 	//////////////////////////////////////////////////////////////////////////
 	//myJclmsTest20150305();
-	myJclmsTest20150306STM32Demo();
+	//myJclmsTest20150306STM32Demo();
+	myJclmsTest20150619STM32Demo();
 	//printf("%s\n",zw3desTest311("0123456789ABCDEF").c_str());
 
 
