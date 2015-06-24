@@ -12,7 +12,7 @@ unsigned int RdtscRand()
 		rdtsc;0
 			mov iRand, eax;
 	}
-	return iRand;
+	return iRand;	
 }
 #else	//ARM
 extern unsigned int RdtscRand();

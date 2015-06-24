@@ -78,6 +78,13 @@ void myECIES_KeyGenTest325(void)
 
 void myECIESTest305ForArm()
 {
+	/////////////////////////////生成激活信息/////////////////////////////////////////////
+	char ccbActiveInfo[ZW_ECIES_CRYPT_TOTALLEN];
+	//const char *ccbInput1="0123456789ABCDEF";
+	//const char *ccbInput2="01234ABCDEF56789";
+	const char *ccbInput1="1234567890abcdef";
+	const char *ccbInput2="1234567890abcdef";
+	
 	//生成公钥私钥对操作
 	char pubKey[ZW_ECIES_PUBKEY_LEN];
 	char priKey[ZW_ECIES_PRIKEY_LEN];
@@ -88,6 +95,32 @@ void myECIESTest305ForArm()
 	//zwGenKeyPair(pubKey,priKey);
 	strcpy(pubKey,"BFlfjkxoiRZFdjQKa/W1JWBwFx+FPyzcFGqXjnlVzMcvIAQyK3C1Ha+G2uGUM4nX5khPQP5AiPFiCyuH2WxZefg=");
 	strcpy(priKey,"y+tgryY83ibv2RaQeb93a97+JX0/9cpWf4MrmUUtrzs=");
+	printf("pubkey=%s\nprikey=%s\n",pubKey,priKey);
+
+	memset(ccbActiveInfo,0,ZW_ECIES_CRYPT_TOTALLEN);
+	time_t nowTime=1400111222;
+	zwGenActiveInfo(pubKey,ccbInput1,ccbInput2,nowTime,ccbActiveInfo);
+	printf("ccbActiveInfo=%s\nnowTime=\t%u\n",ccbActiveInfo,nowTime);
+	/////////////////////////////解密激活信息/////////////////////////////////////////////
+	char PSK[ZW_ECIES_HASH_LEN*2];
+	memset(PSK,0,ZW_ECIES_HASH_LEN*2);
+	time_t origTime=0;
+	zwGetPSK(priKey,ccbActiveInfo,PSK,&origTime);
+	printf("PSK=\t%s \norigTime=\t%u\n",PSK,origTime);
+}
+
+void myECIESTest326ForArmTest1WM()
+{
+	//生成公钥私钥对操作
+	char pubKey[ZW_ECIES_PUBKEY_LEN];
+	char priKey[ZW_ECIES_PRIKEY_LEN];
+	memset(pubKey,0,ZW_ECIES_PUBKEY_LEN);
+	memset(priKey,0,ZW_ECIES_PRIKEY_LEN);
+	//生成操作只用一次，由于前面已经生成过了，所以此处改行注释掉，后面用生成的结果直接复制进来
+	//正式使用时应该是先生成公钥私钥对之后保存到FLASH，用到时取出来使用
+	//zwGenKeyPair(pubKey,priKey);
+	strcpy(pubKey,"BCsvfsK4WGcvECbJGq69ZWS20B+LRv+n+FqQt79esR5DLM2TZny0atXngTUXa7kg5cEfAG1mjueu95L3buAW5xg=");
+	strcpy(priKey,"O5AA9G0HWtw5cW6We7LER2A6Fkli+Pgy3mZ7or+q8/k=");
 	printf("pubkey=%s\nprikey=%s\n",pubKey,priKey);
 	/////////////////////////////生成激活信息/////////////////////////////////////////////
 	char ccbActiveInfo[ZW_ECIES_CRYPT_TOTALLEN];
@@ -104,9 +137,11 @@ void myECIESTest305ForArm()
 	char PSK[ZW_ECIES_HASH_LEN*2];
 	memset(PSK,0,ZW_ECIES_HASH_LEN*2);
 	time_t origTime=0;
-	zwGetPSK(priKey,ccbActiveInfo,PSK,&origTime);
+	const char *wmTest954="BHy3c7f6oSpJVOq0ona/1VZ28SC18C53/eGAO5Tk7LwmEjUWdDaS1+kpfEjPLAGRXVaXP6NYvJG4qC8Gz9pUkz0=.KAB9g96yj7IqnlFfxIICo8Q0orLw5A8E.VQf0J0Tv6je2r9LZOie4Ihg9VbUyQR7ae1R5dATHTIBqvmdhFwO7PyVokiv58QrPqVZhy9vJIkdi8ytmgzxJSAoeThmewvfZHT+o2cabIoA=";
+	zwGetPSK(priKey,wmTest954,PSK,&origTime);
 	printf("PSK=\t%s \norigTime=\t%u\n",PSK,origTime);
 }
+
 
 void myECIESTest305ForArm();
 
@@ -157,24 +192,20 @@ void myJclmsTest20150305()
 	JcLockDelete(handle);
 }
 
-//20150409.周伟.为孙工做了一个锁具开锁整个流程的标准测试向量
 void myJclmsTest20150306STM32Demo()
 {
 	//基本条件
 	const char *atmno="atm10455761";
 	const char *lockno="lock14771509";
-	const char *psk="1E3CA43C32EE402BD5AA7B6B89110021801769FDB530DBF3C1AFC96BD8C3EC9F";
+	const char *psk="PSKDEMO728";
 	//此处是初始闭锁码,生成闭锁码和初始闭锁码的方式类似,初始闭锁码不需要时间和closecode输入，所以输入0
 	int initCloseCode=embSrvGenDyCode(JCCMD_INIT_CLOSECODE,0,0,atmno,lockno,psk);
-	printf("初始闭锁码=\t%d\n", initCloseCode);
 
 	//////////////////////////////////////////////////////////////////////////
 	//从3个基本条件(ATM编号，锁具编号，PSK(也就是激活信息经过解密之后的内容)
 	//和UTC时间秒数，初始闭锁码作为输入，密码服务器生成第一开锁码作为输出
 	time_t curTime=time(NULL);
 	curTime=1425711000;	//20150309调试临时修改固定时间值便于调试
-	//curTime=1425711000-330;
-	printf("固定的动态码生成时间，为了调试方便比较=\t%d\n", curTime);
 	int pass1DyCode=embSrvGenDyCode(JCCMD_CCB_DYPASS1,curTime,initCloseCode,atmno,lockno,psk);
 	printf("第一开锁码=\t%d\n", pass1DyCode);
 	//锁具验证第一开锁码
@@ -186,27 +217,22 @@ void myJclmsTest20150306STM32Demo()
 	printf("验证第一开锁码完毕,时间是%u\n",static_cast<uint32_t>(pass1MatchTime));
 
 	//////////////////////////////////////////////////////////////////////////
-	curTime-=150;
-	//2015/4/13 9:37:22 [星期一] 直接更改时间模拟锁具因故生成超出2.5分钟的验证码
-	//以便反推可以出来有时间结果,便于孙工验证,超出5分钟以上的话一般就直接时间为0
-	//无匹配了
-	//验证码= 65644404	验证验证码结束,时间是1425710670
-	//验证码= 29979085	验证验证码结束,时间是1425711330
 	//锁具生成验证码,第一开锁码作为生成要素,
 	int VerifyDyCode=embSrvGenDyCode(JCCMD_CCB_LOCK_VERCODE,curTime,pass1DyCode,atmno,
 		lockno,psk);
-	printf("验证码=\t%d\t", VerifyDyCode);
-	curTime+=150;
+	printf("验证码=\t%d\n", VerifyDyCode);
 	//密码服务器验证验证码
 	printf("验证验证码开始\n");
 	time_t vercodeMatchTime=embSrvReverseDyCode(JCCMD_CCB_LOCK_VERCODE,VerifyDyCode,pass1DyCode, 
-		curTime,atmno,lockno,psk);
+		//time(NULL),
+		curTime,
+		atmno,lockno,psk);
 	printf("验证验证码结束,时间是%u\n",static_cast<uint32_t>(vercodeMatchTime));
 
 	//////////////////////////////////////////////////////////////////////////
 	//密码服务器生成第二开锁码，验证码作为生成要素
-	int pass2DyCode=embSrvGenDyCode(JCCMD_CCB_DYPASS2,curTime,VerifyDyCode,atmno,
-		lockno,psk);
+	int pass2DyCode=embSrvGenDyCode(JCCMD_CCB_DYPASS2,curTime,VerifyDyCode,"atm10455761",
+		"lock14771509","PSKDEMO728");
 	printf("第二开锁码=\t%d\n", pass2DyCode);
 	//锁具验证第二开锁码
 	printf("验证第二开锁码开始\n");
@@ -222,27 +248,6 @@ void myJclmsTest20150306STM32Demo()
 	printf("闭锁码=\t%d\n", curCloseCode);
 }
 
-
-
-//20150619.周伟.为孙工做了一个密码服务器测试.
-//后来证明是他最近把ARM编译器的优化级别又设置到0，才会出问题的，和去年一样；
-void myJclmsTest20150619STM32Demo()
-{
-	//基本条件
-	const char *atmno="9988";
-	const char *lockno="536934201";
-	const char *psk="1F6A190D05466F879C37CA1A0C4170C990D6ADCE4D2E34679645E8D38D695C4C";
-	int initCloseCode=58934055;
-	printf("初始闭锁码实际使用=\t%d\n", initCloseCode);
-	//////////////////////////////////////////////////////////////////////////
-	//从3个基本条件(ATM编号，锁具编号，PSK(也就是激活信息经过解密之后的内容)
-	//和UTC时间秒数，初始闭锁码作为输入，密码服务器生成第一开锁码作为输出
-	time_t curTime=1434676956;
-	curTime=1434676956;	
-	printf("20150619早上8点49分左右的动态码生成时间=\t%d\n", curTime);
-	int pass1DyCode=embSrvGenDyCode(JCCMD_CCB_DYPASS1,curTime,initCloseCode,atmno,lockno,psk);
-	printf("第一开锁码=\t%d\n", pass1DyCode);
-}
 
 
 
@@ -282,14 +287,16 @@ int main(int argc, char * argv[])
 	//test4CCB3DES_ECB_EDE2();
 
 	//////////////////////////////////////////////////////////////////////////
-	//myECIESTest305ForArm();
-	//Sleep(2000);
-	//myECIESTest305ForArm();
+	myECIESTest305ForArm();
+	Sleep(2000);
+	myECIESTest305ForArm();
+
+	//myECIESTest326ForArmTest1WM();
+	//myECIESTest326ForArmTest1WM();
 
 	//////////////////////////////////////////////////////////////////////////
 	//myJclmsTest20150305();
 	//myJclmsTest20150306STM32Demo();
-	myJclmsTest20150619STM32Demo();
 	//printf("%s\n",zw3desTest311("0123456789ABCDEF").c_str());
 
 
