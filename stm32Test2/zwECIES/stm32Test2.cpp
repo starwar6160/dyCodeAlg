@@ -280,17 +280,45 @@ void myCCB3DESTest324()
 }
 
 
+void myECIESTest709ForArmTest()
+{
+	//生成公钥私钥对操作
+	char pubKey[ZW_ECIES_PUBKEY_LEN];
+	char priKey[ZW_ECIES_PRIKEY_LEN];
+	memset(pubKey,0,ZW_ECIES_PUBKEY_LEN);
+	memset(priKey,0,ZW_ECIES_PRIKEY_LEN);
+	//生成操作只用一次，由于前面已经生成过了，所以此处改行注释掉，后面用生成的结果直接复制进来
+	//正式使用时应该是先生成公钥私钥对之后保存到FLASH，用到时取出来使用
+	//zwGenKeyPair(pubKey,priKey);
+	strcpy(pubKey,"BL07r0BBLHSyTfF/MF4Z/+C//fBuvm8yrwcw5SY85h4DRXrUuJ2rw8WW48l+kn9wi7Ss+3Q2dstJThtYS2I6F+I=");
+	strcpy(priKey,"BthBk76cTXctaIP/PVOGHYGLVLB2W2PA+CwYcZeZess=");
+	printf("pubkey=%s\nprikey=%s\n",pubKey,priKey);
+	/////////////////////////////生成激活信息/////////////////////////////////////////////
+
+
+	time_t nowTime=time(NULL);
+	printf("nowTime=\t%u\n",nowTime);
+	/////////////////////////////解密激活信息/////////////////////////////////////////////
+	char PSK[ZW_ECIES_HASH_LEN*2];
+	memset(PSK,0,ZW_ECIES_HASH_LEN*2);
+	time_t origTime=0;
+	const char *panfeiTest1518="BNRW+I+aavhzpfHm2ZFLnLqYXYKmcSWZ3Xj1bQ5ejQAOBNVceXhcyfKwGKp01mEzBL11907NxlP98iCzkbu4CdI=.3D+2dOuRjAj2q9Z\/YEbOhIerOrc6+96U.qnJt5n\/8YV8X\/y6DPGPDwxaISzOYvVneMkm7g2+\/6PJAfDl\/FKVqakzFq6DcNQnjkC5iBXzv8gUwwBuYXyJlyx3ObpEwA0hMvQ31eXxKpjQ=";
+	zwGetPSK(priKey,panfeiTest1518,PSK,&origTime);
+	printf("PSK=\t%s \norigTime=\t%u\n",PSK,origTime);
+}
+
 
 int main(int argc, char * argv[])
 {	
+	myECIESTest709ForArmTest();
 	//myCCB3DESTest324();
 	//test4CCB3DES_ECB_EDE2();
 
 	//////////////////////////////////////////////////////////////////////////
-	myECIESTest305ForArm();
-	Sleep(2000);
-	myECIESTest305ForArm();
-
+	//myECIESTest305ForArm();
+	//Sleep(2000);
+	//myECIESTest305ForArm();
+	
 	//myECIESTest326ForArmTest1WM();
 	//myECIESTest326ForArmTest1WM();
 
