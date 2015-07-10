@@ -294,10 +294,15 @@ void myECIESTest709ForArmTest()
 	strcpy(priKey,"BthBk76cTXctaIP/PVOGHYGLVLB2W2PA+CwYcZeZess=");
 	printf("pubkey=%s\nprikey=%s\n",pubKey,priKey);
 	/////////////////////////////生成激活信息/////////////////////////////////////////////
+	char ccbActiveInfo[ZW_ECIES_CRYPT_TOTALLEN];
+	const char *ccbInput1="1234567890654321";
+	const char *ccbInput2="1234567890654321";
 
-
+	memset(ccbActiveInfo,0,ZW_ECIES_CRYPT_TOTALLEN);
 	time_t nowTime=time(NULL);
-	printf("nowTime=\t%u\n",nowTime);
+	zwGenActiveInfo(pubKey,ccbInput1,ccbInput2,nowTime,ccbActiveInfo);
+	printf("ccbActiveInfo=%s\nnowTime=\t%u\n",ccbActiveInfo,nowTime);
+
 	/////////////////////////////解密激活信息/////////////////////////////////////////////
 	char PSK[ZW_ECIES_HASH_LEN*2];
 	memset(PSK,0,ZW_ECIES_HASH_LEN*2);
