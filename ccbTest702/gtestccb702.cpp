@@ -426,12 +426,13 @@ namespace CcbV11Test722Ecies {
 		printf("INFO1210:\n%s\n",zwMergePsk("aaaaaaaaaa"));
 	}
 
-	TEST_F(ECIES_Test, zwYinBaoTest714) {		
-		
-		const char *ybinput="YinBaoMsg714.1607";
+	void yb714Test(const char *ybinput)
+	{	
 		const int ybLen=strlen(ybinput);
 		char outHash[32];
 		zwYinBaoGetHash(ybinput,ybLen,outHash);
+		printf("印宝输入字符串为\t%s\t长度为%d\n",ybinput,ybLen);
+		printf("印宝的输入第一阶段SM3 HASH结果是:\n");
 		for (int i=0;i<32;i++)
 		{
 			uint8_t num=outHash[i];
@@ -439,8 +440,15 @@ namespace CcbV11Test722Ecies {
 		}
 		printf("\n");
 		uint32_t ybn=zwYinBaoHash2Code(outHash);
-		printf("%s RESULT IS %u\n",__FUNCTION__,ybn);
+		printf("印宝的输入第二阶段8位数字码结果是:\t%d\n",ybn);
 
+	}
+
+	//20150714.1714.印宝算法最基本组件测试
+	TEST_F(ECIES_Test, zwYinBaoTest714) {				
+		yb714Test("YBT1723");
+		yb714Test("YinBaoMsg714.1607");
+		yb714Test("YinBaoMsg714.1721.data1");
 	}
 
 

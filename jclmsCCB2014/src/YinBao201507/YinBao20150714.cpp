@@ -26,10 +26,7 @@ JCLMSCCB2014_API void __stdcall zwYinBaoGetHash(const char *inData,const int inL
 }
 
 JCLMSCCB2014_API int __stdcall zwYinBaoHash2Code( const char *inData )
-{
-	const char *ybinput="YinBaoMsg714";
-	const int ybLen=strlen(ybinput);
-	int ybn=zwBinString2Int32(ybinput,ybLen);
-	//printf("%s RESULT IS %u\n",__FUNCTION__,ybn);
+{	
+	int ybn=zwBinString2Int32(inData,ZWHASHLEN);
 	return ybn;
 };
