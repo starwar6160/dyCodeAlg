@@ -2,7 +2,7 @@
 #include "jclmsCCB2014.h"
 #include "zwEcies529.h"
 
-#define _DEBUG_ECIES_NORMAL_TEST1117
+//#define _DEBUG_ECIES_NORMAL_TEST1117
 //#define _DEBUG_ECIES_BADINPUT_TEST1117
 //#define _DEBUG_ECIES_CSTEST1117
 
@@ -424,6 +424,11 @@ namespace CcbV11Test722Ecies {
 
 	TEST_F(ECIES_Test, zwMergePskTest) {		
 		printf("INFO1210:\n%s\n",zwMergePsk("aaaaaaaaaa"));
+	}
+
+	TEST_F(ECIES_Test, zwYinBaoTest714) {		
+		myYinBaoTest714();
+
 	}
 
 

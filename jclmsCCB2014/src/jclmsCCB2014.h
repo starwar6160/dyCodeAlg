@@ -72,7 +72,8 @@ int JCLMSCCB2014_API zwLmsAlgStandTest20141216VerifyPass1(void);
 //输出：JSON格式的返回值，输出缓冲区最大长度由outJsonLen指定
 //void JCLMSCCB2014_API zwJclmsRsp( void * inLmsReq,const int inLmsReqLen,char *outJson,const int outJsonLen );
 void JCLMSCCB2014_API myPureHidTestDataGen20141216(void);
-
+//myYinBaoTest714
+JCLMSCCB2014_API void __stdcall myYinBaoTest714(void);
 
 #ifdef  __cplusplus
 }	//extern "C" {
