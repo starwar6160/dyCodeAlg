@@ -16,8 +16,6 @@ namespace cstest702
         const Int32 validity = 5;
         const int ZW_FAKE_PASS1 = 11111111;
 
-
-
         private static void myECIESTestOld1()
         {
             //安全初始化例子

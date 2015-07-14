@@ -13,4 +13,5 @@ JcLockGetVersion
 JcLockDebugPrint
 zwJcLockDumpJCINPUT
 zwSM3StandardTestVector
-myYinBaoTest714
+zwYinBaoHash2Code
+zwYinBaoGetHash

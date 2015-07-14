@@ -427,7 +427,19 @@ namespace CcbV11Test722Ecies {
 	}
 
 	TEST_F(ECIES_Test, zwYinBaoTest714) {		
-		myYinBaoTest714();
+		
+		const char *ybinput="YinBaoMsg714.1607";
+		const int ybLen=strlen(ybinput);
+		char outHash[32];
+		zwYinBaoGetHash(ybinput,ybLen,outHash);
+		for (int i=0;i<32;i++)
+		{
+			uint8_t num=outHash[i];
+			printf("%02X",num);
+		}
+		printf("\n");
+		uint32_t ybn=zwYinBaoHash2Code(outHash);
+		printf("%s RESULT IS %u\n",__FUNCTION__,ybn);
 
 	}
 
