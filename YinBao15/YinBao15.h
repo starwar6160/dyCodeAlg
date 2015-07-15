@@ -27,11 +27,18 @@ extern YINBAO15_API int nYinBao15;
 YINBAO15_API int fnYinBao15(void);
 
 
+#ifdef _DEBUG_20150715
 YINBAO15_API void __stdcall zwYinBaoGetHash(const char *inData,const int inLength,char* outHash256);
 //zwYinBaoHash2Code
 YINBAO15_API int __stdcall zwYinBaoHash2Code(const char *inData);
-
 YINBAO15_API const char * __stdcall zwYinBaoGetHashSM3(const char *inData,const int inLength);
+#endif // _DEBUG_20150715
+
+//默认输出256bit的HASH，无论是SM3还是SHA256，对于我们的用途肯定够用了
+YINBAO15_API void __stdcall zwYinBaoGetHashSM3(const char *inData,const int inLength,char* &outHash256);
+YINBAO15_API int __stdcall zwYinBaoHash2Code(const char *inData);
+
+
 #ifdef  __cplusplus
 }	//extern "C" {
 #endif

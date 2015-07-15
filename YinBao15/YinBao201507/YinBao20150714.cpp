@@ -62,7 +62,8 @@ unsigned int zwBinString2Int32(const char *data, const int len)
 
 
 
-
+//改回去出参方式，这些代码留着备用
+#ifdef _DEBUG_20150715
 //默认输出256bit的HASH，无论是SM3还是SHA256，对于我们的用途肯定够用了
 YINBAO15_API void __stdcall zwYinBaoGetHash(const char *inData,const int inLength,char* outHash256)
 {
@@ -117,5 +118,27 @@ YINBAO15_API int __stdcall zwYinBaoHash2Code( const char *inHexStr )
 		inHashBin256[i]=ch;
 	}
 	int ybn=zwBinString2Int32(inHashBin256,ZWHASHLEN);
+	return ybn;
+};
+#endif // _DEBUG_20150715
+
+
+//默认输出256bit的HASH，无论是SM3还是SHA256，对于我们的用途肯定够用了
+YINBAO15_API void __stdcall zwYinBaoGetHashSM3(const char *inData,const int inLength,char* &outHash256)
+{
+	assert(NULL!=inData && strlen(inData)>0);
+	assert(inLength>0);
+	assert(NULL!=(*outHash256));
+	memset(outHash256,0,ZWHASHLEN);
+	printf("%s\n",__FUNCTION__);
+	SM3 sm3;
+	SM3_Init(&sm3);
+	mySM3Update(&sm3, inData,inLength);
+	SM3_Final(&sm3, outHash256);
+}
+
+YINBAO15_API int __stdcall zwYinBaoHash2Code( const char *inData )
+{	
+	int ybn=zwBinString2Int32(inData,ZWHASHLEN);
 	return ybn;
 };
