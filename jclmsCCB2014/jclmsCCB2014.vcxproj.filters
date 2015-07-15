@@ -31,9 +31,6 @@
     <Filter Include="源文件\3DES">
       <UniqueIdentifier>{0df26ded-b032-49db-963c-dd8ca0404c72}</UniqueIdentifier>
     </Filter>
-    <Filter Include="源文件\dyCodeYinBao">
-      <UniqueIdentifier>{3ab7900e-1d88-4736-993f-a4f108bd1408}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -133,9 +130,6 @@
     </ClCompile>
     <ClCompile Include="src\cpp3DES\des.cpp">
       <Filter>源文件\3DES</Filter>
-    </ClCompile>
-    <ClCompile Include="src\YinBao201507\YinBao20150714.cpp">
-      <Filter>源文件\dyCodeYinBao</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "jclmsCCB2014.h"
 #include "zwEcies529.h"
+#include "..\\YinBao15\YinBao15.h"
 
 //#define _DEBUG_ECIES_NORMAL_TEST1117
 //#define _DEBUG_ECIES_BADINPUT_TEST1117
