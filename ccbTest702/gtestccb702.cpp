@@ -431,18 +431,13 @@ namespace CcbV11Test722Ecies {
 	{	
 		const int ybLen=strlen(ybinput);
 		char outHash[32];
-		zwYinBaoGetHash(ybinput,ybLen,outHash);
+		string ybHash=zwYinBaoGetHashSM3(ybinput,ybLen);
+		printf("ybHash=%s\n",ybHash.c_str());
 		printf("印宝输入字符串为\t%s\t长度为%d\n",ybinput,ybLen);
-		printf("印宝的输入第一阶段SM3 HASH结果是:\n");
-		for (int i=0;i<32;i++)
-		{
-			uint8_t num=outHash[i];
-			printf("%02X",num);
-		}
-		printf("\n");
-		uint32_t ybn=zwYinBaoHash2Code(outHash);
-		printf("印宝的输入第二阶段8位数字码结果是:\t%d\n",ybn);
+		printf("印宝的输入第一阶段SM3 HASH结果是:\n%s\n",ybHash.c_str());
 
+		uint32_t ybn=zwYinBaoHash2Code(ybHash.c_str());
+		printf("印宝的输入第二阶段8位数字码结果是:\t%d\n",ybn);
 	}
 
 	//20150714.1714.印宝算法最基本组件测试

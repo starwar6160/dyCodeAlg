@@ -61,6 +61,8 @@ unsigned int zwBinString2Int32(const char *data, const int len)
 //////////////////////////////////////////////////////////////////////////
 
 
+
+
 //默认输出256bit的HASH，无论是SM3还是SHA256，对于我们的用途肯定够用了
 YINBAO15_API void __stdcall zwYinBaoGetHash(const char *inData,const int inLength,char* outHash256)
 {
@@ -75,8 +77,45 @@ YINBAO15_API void __stdcall zwYinBaoGetHash(const char *inData,const int inLengt
 	SM3_Final(&sm3, outHash256);
 }
 
-YINBAO15_API int __stdcall zwYinBaoHash2Code( const char *inData )
+
+YINBAO15_API const char * __stdcall zwYinBaoGetHashSM3( const char *inData,const int inLength )
+{
+	//在这里，static的智能指针本身，应该不是什么问题。20150715.1453，周伟
+	static shared_ptr<string> rtn(new string);
+	assert(NULL!=inData && strlen(inData)>0);
+	assert(inLength>0);	
+	(*rtn).clear();
+	char outHash256[ZWHASHLEN];
+	memset(outHash256,0,ZWHASHLEN);
+	SM3 sm3;
+	SM3_Init(&sm3);
+	mySM3Update(&sm3, inData,inLength);
+	SM3_Final(&sm3, outHash256);
+	
+	for (int i=0;i<ZWHASHLEN;i++)
+	{
+		uint8_t ch=outHash256[i];
+		char st[3];
+		memset(st,0,3);
+		sprintf(st,"%02X",ch);
+		(*rtn)+=st;
+	}
+	return (*rtn).c_str();
+}
+
+
+YINBAO15_API int __stdcall zwYinBaoHash2Code( const char *inHexStr )
 {	
-	int ybn=zwBinString2Int32(inData,ZWHASHLEN);
+	assert(NULL!=inHexStr && strlen(inHexStr)>0);
+	char inHashBin256[ZWHASHLEN];
+	memset(inHashBin256,0,ZWHASHLEN);
+	for (int i=0;i<ZWHASHLEN;i++)
+	{
+		int32_t ch=0;
+		sscanf(inHexStr+i*2,"%02X",&ch);
+		assert(ch>=0 && ch<=255);
+		inHashBin256[i]=ch;
+	}
+	int ybn=zwBinString2Int32(inHashBin256,ZWHASHLEN);
 	return ybn;
 };

@@ -12,7 +12,12 @@
 #include <windows.h>
 #include <cassert>
 #include <iostream>
+#include <sstream>
+#include <string>
 using std::cout;
 using std::endl;
-
+using std::string;
+using std::stringstream;
+#include <boost/shared_ptr.hpp>
+using boost::shared_ptr;
 // TODO: 在此处引用程序需要的其他头文件

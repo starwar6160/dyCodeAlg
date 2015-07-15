@@ -3,3 +3,4 @@ LIBRARY YinBao15
 EXPORTS
 zwYinBaoHash2Code
 zwYinBaoGetHash
+zwYinBaoGetHashSM3

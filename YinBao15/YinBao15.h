@@ -31,6 +31,7 @@ YINBAO15_API void __stdcall zwYinBaoGetHash(const char *inData,const int inLengt
 //zwYinBaoHash2Code
 YINBAO15_API int __stdcall zwYinBaoHash2Code(const char *inData);
 
+YINBAO15_API const char * __stdcall zwYinBaoGetHashSM3(const char *inData,const int inLength);
 #ifdef  __cplusplus
 }	//extern "C" {
 #endif
