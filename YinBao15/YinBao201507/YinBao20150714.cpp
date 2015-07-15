@@ -124,11 +124,19 @@ YINBAO15_API int __stdcall zwYinBaoHash2Code( const char *inHexStr )
 
 
 //默认输出256bit的HASH，无论是SM3还是SHA256，对于我们的用途肯定够用了
-YINBAO15_API void __stdcall zwYinBaoGetHashSM3(const char *inData,const int inLength,char* &outHash256)
+YINBAO15_API int __stdcall zwYinBaoGetHashSM3(const char *inData,const int inLength,char* &outHash256)
 {
 	assert(NULL!=inData && strlen(inData)>0);
 	assert(inLength>0);
 	assert(NULL!=(*outHash256));	
+	if (NULL==inData || strlen(inData)==0 ||inLength<=0)
+	{
+		return -1706;
+	}
+	if (NULL==outHash256)
+	{
+		return -1707;
+	}
 	char outHashTmp[ZWHASHLEN];
 	memset(outHashTmp,0,ZWHASHLEN);
 	printf("%s\n",__FUNCTION__);
@@ -150,11 +158,16 @@ YINBAO15_API void __stdcall zwYinBaoGetHashSM3(const char *inData,const int inLe
 		hexHashStr+=st;
 	}
 	strcpy(outHash256,hexHashStr.c_str());
+	return 0;
 }
 
 YINBAO15_API int __stdcall zwYinBaoHash2Code( const char *inHexStr )
 {	
 	assert(NULL!=inHexStr && strlen(inHexStr)>0);
+	if (NULL==inHexStr || strlen(inHexStr)==0)
+	{
+		return -1708;
+	}
 	char inHashBin256[ZWHASHLEN];
 	memset(inHashBin256,0,ZWHASHLEN);
 	for (int i=0;i<ZWHASHLEN;i++)
