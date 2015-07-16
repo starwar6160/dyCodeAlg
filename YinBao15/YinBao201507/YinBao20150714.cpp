@@ -1,10 +1,6 @@
 #include "stdafx.h"
 #include "YinBao15.h"
 #include "sm3.h"
-//从包含二进制数据的字符串输入，获得一个8位整数的输出
-unsigned int zwBinString2Int32(const char *data, const int len);
-void myybSM3Update(SM3 * ctx, const char *data, const int len);
-
 
 namespace myYinBao201507{
 	const int ZWHASHLEN=256/8;	//256 bit Hash结果
@@ -62,12 +58,22 @@ namespace myYinBao201507{
 		}
 	}
 	//从包含二进制数据的字符串输入，获得一个8位整数的输出
-	unsigned int zwBinString2Int32(const char *data, const int len)
+	unsigned int zwBinString2Num(const char *data, const int len, int lowBound,int highBound)
 	{
+		assert(NULL!=data && len>0);
+		assert(lowBound>0 && highBound>0 && lowBound<highBound && lowBound!=highBound);
+		if (NULL==data || len<=0)
+		{
+			return 1746;
+		}
+		if (lowBound<=0 || highBound<=0 || lowBound>highBound || lowBound==highBound) 
+		{
+			return 1748;
+		}
 		//比1开头的8位数稍微大一些的质数
-		const int dyLow = 10000019;
+		
 		//比9开头的8位数稍微小一些的质数
-		const int dyMod = 89999969;
+		//const int dyMod = 89999969;
 		const int dyMul = 257;	//随便找的一个质数作为相乘的因子
 
 		unsigned __int64 sum = 0;
@@ -77,9 +83,29 @@ namespace myYinBao201507{
 			sum += t;
 		}
 		//这两个数字结合使用，产生肯定是8位数的动态码
-		sum %= dyMod;
-		sum += dyLow;
+		sum %= highBound;
+		sum += lowBound;
 		return static_cast<unsigned int>(sum);
+	}
+
+	//根据输入生成不同位数的动态码
+	unsigned int zwBinString2Num(const char *data, const int len,const int numLen)
+	{
+		assert(NULL!=data && len>0);
+		assert(numLen>=4 && numLen<=12);
+		if (NULL==data || len<=0)
+		{
+			return 1746;
+		}
+		if (numLen<4 || numLen>12)
+		{
+			return 1747;
+		}
+		if (8==numLen)
+		{
+			return zwBinString2Num(data,len,10000019,89999969);
+		}
+		return -1744;
 	}
 	int myybHex2Bin(const char *inHexStr,char *outBin,int outLen)
 	{	
@@ -114,6 +140,7 @@ namespace myYinBao201507{
 
 
 using myYinBao201507::ZWHASHLEN;
+namespace yb=myYinBao201507;
 
 ///////////////////////////////COPY FROM JCLMSCCB2014///////////////////////////////////////////
 
@@ -182,7 +209,7 @@ YINBAO15_API int __stdcall zwYinBaoHash2Code( const char *inHexStr )
 		assert(ch>=0 && ch<=255);
 		inHashBin256[i]=ch;
 	}
-	int ybn=zwBinString2Int32(inHashBin256,ZWHASHLEN);
+	int ybn=zwBinString2Num8(inHashBin256,ZWHASHLEN);
 	return ybn;
 };
 #endif // _DEBUG_20150715
@@ -208,10 +235,10 @@ YINBAO15_API int __stdcall zwYinBaoGetHashSM3(const char *inData,const int inLen
 	printf("%s\n",__FUNCTION__);
 	SM3 sm3;
 	SM3_Init(&sm3);
-	myYinBao201507::myybSM3Update(&sm3, inData,inLength);
+	yb::myybSM3Update(&sm3, inData,inLength);
 	SM3_Final(&sm3, outHashTmp);
 
-	myYinBao201507::myBin2Hex(outHashTmp,ZWHASHLEN,outHash256,ZWHASHLEN*2+1);
+	yb::myBin2Hex(outHashTmp,ZWHASHLEN,outHash256,ZWHASHLEN*2+1);
 
 	return 0;
 }
@@ -226,7 +253,7 @@ YINBAO15_API int __stdcall zwYinBaoHash2Code( const char *inHexStr )
 		return -1708;
 	}
 	char inHashBin256[ZWHASHLEN];
-	myYinBao201507::myybHex2Bin(inHexStr,inHashBin256,ZWHASHLEN);
-	int ybn=myYinBao201507::zwBinString2Int32(inHashBin256,ZWHASHLEN);
+	yb::myybHex2Bin(inHexStr,inHashBin256,ZWHASHLEN);
+	int ybn=yb::zwBinString2Num(inHashBin256,ZWHASHLEN,8);
 	return ybn;
 };
