@@ -37,7 +37,7 @@ YINBAO15_API const char * __stdcall zwYinBaoGetHashSM3(const char *inData,const 
 
 //默认输出256bit的HASH，无论是SM3还是SHA256，对于我们的用途肯定够用了
 YINBAO15_API int __stdcall zwYinBaoGetHashSM3(const char *inData,const int inLength,char* &outHash256);
-//输入HEX字符串，必须是双数长度，以及要求的位数
+//输入HEX字符串，必须是双数长度，以及要求的位数,可以用6，8，10，12位，如果输入位数错误，默认8位
 YINBAO15_API int64_t __stdcall zwYinBaoHash2Code( const char *inHexStr,int CodeLen );
 
 

@@ -82,6 +82,7 @@
     <None Include="YinBao15.def" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="YinBao15.h" />
@@ -105,6 +106,9 @@
     </ClCompile>
     <ClCompile Include="YinBao15.cpp" />
     <ClCompile Include="YinBao201507\YinBao20150714.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="YinBao15.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

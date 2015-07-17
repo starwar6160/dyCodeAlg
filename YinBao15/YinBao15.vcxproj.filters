@@ -36,6 +36,9 @@
     <ClInclude Include="YinBao15.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -53,5 +56,10 @@
     <ClCompile Include="..\jclmsCCB2014\zwECIES\sm3_1407.c">
       <Filter>源文件\HashCopy</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="YinBao15.rc">
+      <Filter>资源文件</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>
