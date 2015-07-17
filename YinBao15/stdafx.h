@@ -19,5 +19,8 @@ using std::endl;
 using std::string;
 using std::stringstream;
 #include <boost/shared_ptr.hpp>
+#include <boost/lexical_cast.hpp> 
+using boost::lexical_cast;
+using boost::bad_lexical_cast;
 using boost::shared_ptr;
 // TODO: 在此处引用程序需要的其他头文件

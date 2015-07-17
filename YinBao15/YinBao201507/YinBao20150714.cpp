@@ -194,7 +194,7 @@ YINBAO15_API void __stdcall zwYinBaoGetHash(const char *inData,const int inLengt
 }
 
 
-YINBAO15_API const char * __stdcall jcYinBaoGetHashSM3( const char *inData,const int inLength )
+YINBAO15_API const char * __stdcall jcGetHashSM3( const char *inData,const int inLength )
 {
 	//在这里，static的智能指针本身，应该不是什么问题。20150715.1453，周伟
 	static shared_ptr<string> rtn(new string);
@@ -220,7 +220,7 @@ YINBAO15_API const char * __stdcall jcYinBaoGetHashSM3( const char *inData,const
 }
 
 
-YINBAO15_API int __stdcall jcYinBaoHash2Code( const char *inHexStr )
+YINBAO15_API int __stdcall jcHash2Code8( const char *inHexStr )
 {	
 	assert(NULL!=inHexStr && strlen(inHexStr)>0);
 	char inHashBin256[ZWHASHLEN];
@@ -240,7 +240,7 @@ YINBAO15_API int __stdcall jcYinBaoHash2Code( const char *inHexStr )
 
 
 //默认输出256bit的HASH，无论是SM3还是SHA256，对于我们的用途肯定够用了
-YINBAO15_API int __stdcall jcYinBaoGetHashSM3(const char *inData,const int inLength,char* &outHash256)
+YINBAO15_API int __stdcall jcGetHashSM3(const char *inData,const int inLength,char* &outHash256)
 {
 	assert(NULL!=inData && strlen(inData)>0);
 	assert(inLength>0);
@@ -268,22 +268,19 @@ YINBAO15_API int __stdcall jcYinBaoGetHashSM3(const char *inData,const int inLen
 
 
 
-YINBAO15_API int64_t __stdcall jcYinBaoHash2Code( const char *inHexStr,int inCodeLen )
+YINBAO15_API int __stdcall jcHash2Code8( const char *inHexStr,char * &outCodeStr )
 {	
 	assert(NULL!=inHexStr && strlen(inHexStr)>0);
-	assert(inCodeLen>=4 && inCodeLen<=18);
+	assert(NULL!=outCodeStr);
 	if (NULL==inHexStr || strlen(inHexStr)==0)
 	{
 		return -1708;
 	}
 	char inHashBin256[ZWHASHLEN];
 	yb::myybHex2Bin(inHexStr,inHashBin256,ZWHASHLEN);
-	int rCodeLen=inCodeLen;
-	//如果不是可以接受的6，8，10，12位这几种长度，就默认值8位
-	if (6!=inCodeLen && 8!=inCodeLen && 10!=inCodeLen && 12!=inCodeLen)
-	{
-		rCodeLen=8;
-	}
-	int64_t ybn=yb::zwBinString2Num(inHashBin256,ZWHASHLEN,rCodeLen);
-	return ybn;
+	int64_t ybn=yb::zwBinString2Num(inHashBin256,ZWHASHLEN,8);
+	static shared_ptr<string> rtn(new string);
+	(*rtn)=lexical_cast<string>(ybn);
+	strcpy(outCodeStr,(*rtn).c_str());
+	return 0;
 };

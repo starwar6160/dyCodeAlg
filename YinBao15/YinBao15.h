@@ -30,16 +30,15 @@ YINBAO15_API int fnYinBao15(void);
 
 #ifdef _DEBUG_20150715
 YINBAO15_API void __stdcall zwYinBaoGetHash(const char *inData,const int inLength,char* outHash256);
-//jcYinBaoHash2Code
-YINBAO15_API int __stdcall jcYinBaoHash2Code(const char *inData);
-YINBAO15_API const char * __stdcall jcYinBaoGetHashSM3(const char *inData,const int inLength);
+//jcHash2Code8
+YINBAO15_API int __stdcall jcHash2Code8(const char *inData);
+YINBAO15_API const char * __stdcall jcGetHashSM3(const char *inData,const int inLength);
 #endif // _DEBUG_20150715
 
 //默认输出256bit的HASH，无论是SM3还是SHA256，对于我们的用途肯定够用了
-YINBAO15_API int __stdcall jcYinBaoGetHashSM3(const char *inData,const int inLength,char* &outHash256);
-//输入HEX字符串，必须是双数长度，以及要求的位数,可以用6，8，10，12位，如果输入位数错误，默认8位
-YINBAO15_API int64_t __stdcall jcYinBaoHash2Code( const char *inHexStr,int inCodeLen );
-
+YINBAO15_API int __stdcall jcGetHashSM3(const char *inData,const int inLength,char* &outHash256);
+//输入HEX字符串，必须是双数长度，出参输出8位字符
+YINBAO15_API int __stdcall jcHash2Code8( const char *inHexStr,char * &outCodeStr);
 
 #ifdef  __cplusplus
 }	//extern "C" {

@@ -1,5 +1,5 @@
 LIBRARY YinBao15
 
 EXPORTS
-jcYinBaoGetHashSM3
-jcYinBaoHash2Code
+jcGetHashSM3
+jcHash2Code8
