@@ -433,7 +433,7 @@ namespace CcbV11Test722Ecies {
 		const int ybLen=strlen(ybinput);
 		char outHash[32*2+1];
 		char *oth=outHash;
-		zwYinBaoGetHashSM3(ybinput,ybLen,oth);
+		jcYinBaoGetHashSM3(ybinput,ybLen,oth);
 		
 		printf("印宝输入字符串为\t%s\t长度为%d\n",ybinput,ybLen);
 		printf("印宝的输入第一阶段SM3 HASH结果是:\n%s\n",outHash);
@@ -444,7 +444,7 @@ namespace CcbV11Test722Ecies {
 		}
 		printf("\n");
 #endif // _DEBUG715A1
-		int64_t ybn=zwYinBaoHash2Code(outHash,12);
+		int64_t ybn=jcYinBaoHash2Code(outHash,12);
 		printf("印宝的输入第二阶段8位数字码结果是:\t%lld\n",ybn);
 	}
 
