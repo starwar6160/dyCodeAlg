@@ -266,21 +266,50 @@ YINBAO15_API int __stdcall jcGetHashSM3(const char *inData,const int inLength,ch
 	return 0;
 }
 
+int __stdcall jcHash2CodeNum( const char * inHexStr, char * & outCodeStr,int codeLen );
+
 
 
 YINBAO15_API int __stdcall jcHash2Code8( const char *inHexStr,char * &outCodeStr )
 {	
+	return jcHash2CodeNum(inHexStr, outCodeStr,8);
+};
+
+YINBAO15_API int __stdcall jcHash2Code6( const char *inHexStr,char * &outCodeStr )
+{	
+	return jcHash2CodeNum(inHexStr, outCodeStr,6);
+};
+
+YINBAO15_API int __stdcall jcHash2Code10( const char *inHexStr,char * &outCodeStr )
+{	
+	return jcHash2CodeNum(inHexStr, outCodeStr,10);
+};
+
+YINBAO15_API int __stdcall jcHash2Code12( const char *inHexStr,char * &outCodeStr )
+{	
+	return jcHash2CodeNum(inHexStr, outCodeStr,12);
+};
+
+
+int __stdcall jcHash2CodeNum( const char * inHexStr, char * & outCodeStr,int codeLen )
+{
 	assert(NULL!=inHexStr && strlen(inHexStr)>0);
 	assert(NULL!=outCodeStr);
+	assert(codeLen>=4 && codeLen<=18);
 	if (NULL==inHexStr || strlen(inHexStr)==0)
 	{
 		return -1708;
 	}
+	int rCodeLen=codeLen;
+	if (rCodeLen<4 || rCodeLen>18 || (rCodeLen % 2==1))
+	{
+		rCodeLen=8;
+	}
 	char inHashBin256[ZWHASHLEN];
 	yb::myybHex2Bin(inHexStr,inHashBin256,ZWHASHLEN);
-	int64_t ybn=yb::zwBinString2Num(inHashBin256,ZWHASHLEN,8);
-	static shared_ptr<string> rtn(new string);
-	(*rtn)=lexical_cast<string>(ybn);
-	strcpy(outCodeStr,(*rtn).c_str());
+	int64_t ybn=yb::zwBinString2Num(inHashBin256,ZWHASHLEN,rCodeLen);
+	string rtn;
+	rtn=lexical_cast<string>(ybn);
+	strcpy(outCodeStr,rtn.c_str());
 	return 0;
-};
+}

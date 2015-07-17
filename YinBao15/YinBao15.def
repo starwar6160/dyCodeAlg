@@ -3,3 +3,6 @@ LIBRARY YinBao15
 EXPORTS
 jcGetHashSM3
 jcHash2Code8
+jcHash2Code6
+jcHash2Code10
+jcHash2Code12

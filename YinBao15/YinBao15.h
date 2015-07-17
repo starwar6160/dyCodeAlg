@@ -40,6 +40,9 @@ YINBAO15_API int __stdcall jcGetHashSM3(const char *inData,const int inLength,ch
 //输入HEX字符串，必须是双数长度，出参输出8位字符
 YINBAO15_API int __stdcall jcHash2Code8( const char *inHexStr,char * &outCodeStr);
 
+YINBAO15_API int __stdcall jcHash2Code6( const char *inHexStr,char * &outCodeStr );
+YINBAO15_API int __stdcall jcHash2Code10( const char *inHexStr,char * &outCodeStr );
+YINBAO15_API int __stdcall jcHash2Code12( const char *inHexStr,char * &outCodeStr );
 #ifdef  __cplusplus
 }	//extern "C" {
 #endif
