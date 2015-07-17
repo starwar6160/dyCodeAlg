@@ -10,6 +10,7 @@
 #define YINBAO15_API __declspec(dllimport)
 #endif
 
+#include <cstdint>
 // 此类是从 YinBao15.dll 导出的
 class YINBAO15_API CYinBao15 {
 public:
@@ -36,7 +37,8 @@ YINBAO15_API const char * __stdcall zwYinBaoGetHashSM3(const char *inData,const 
 
 //默认输出256bit的HASH，无论是SM3还是SHA256，对于我们的用途肯定够用了
 YINBAO15_API int __stdcall zwYinBaoGetHashSM3(const char *inData,const int inLength,char* &outHash256);
-YINBAO15_API int __stdcall zwYinBaoHash2Code(const char *inData);
+//输入HEX字符串，必须是双数长度，以及要求的位数
+YINBAO15_API int64_t __stdcall zwYinBaoHash2Code( const char *inHexStr,int CodeLen );
 
 
 #ifdef  __cplusplus

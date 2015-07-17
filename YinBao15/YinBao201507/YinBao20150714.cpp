@@ -58,7 +58,7 @@ namespace myYinBao201507{
 		}
 	}
 	//从包含二进制数据的字符串输入，获得一个8位整数的输出
-	unsigned int zwBinString2Num(const char *data, const int len, int lowBound,int highBound)
+	uint64_t zwBinString2NumHL(const char *data, const int len, int64_t lowBound,int64_t highBound)
 	{
 		assert(NULL!=data && len>0);
 		assert(lowBound>0 && highBound>0 && lowBound<highBound && lowBound!=highBound);
@@ -76,7 +76,7 @@ namespace myYinBao201507{
 		//const int dyMod = 89999969;
 		const int dyMul = 257;	//随便找的一个质数作为相乘的因子
 
-		unsigned __int64 sum = 0;
+		uint64_t sum = 0;
 		for (int i = 0; i < len; i++) {
 			unsigned char t = *(data + i);
 			sum *= dyMul;
@@ -85,11 +85,11 @@ namespace myYinBao201507{
 		//这两个数字结合使用，产生肯定是8位数的动态码
 		sum %= highBound;
 		sum += lowBound;
-		return static_cast<unsigned int>(sum);
+		return sum;
 	}
 
 	//根据输入生成不同位数的动态码
-	unsigned int zwBinString2Num(const char *data, const int len,const int numLen)
+	uint64_t zwBinString2Num(const char *data, const int len,const int numLen)
 	{
 		assert(NULL!=data && len>0);
 		assert(numLen>=4 && numLen<=12);
@@ -103,7 +103,30 @@ namespace myYinBao201507{
 		}
 		if (8==numLen)
 		{
-			return zwBinString2Num(data,len,10000019,89999969);
+			return zwBinString2NumHL(data,len,10000019L,89999969L);
+		}
+		if (6==numLen)
+		{
+			//primes([100000,100100])
+			//[100003, 100019, 100043, 100049, 100057, 100069]
+			//primes([899900,899999])
+			//[899903, 899917, 899939, 899971, 899981]
+			return zwBinString2NumHL(data,len,100003L,899981L);
+		}
+		if (10==numLen)
+		{
+			//primes([1000000000,1000000100])
+			//[1000000007, 1000000009, 1000000021, 1000000033, 1000000087, 1000000093, 1000000097]
+			//[8999999909, 8999999929, 8999999993]
+			return zwBinString2NumHL(data,len,1000000007L,8999999929L);
+		}
+		if (12==numLen)
+		{
+			//primes([100000000000,100000000100])
+			// [100000000003, 100000000019, 100000000057, 100000000063, 100000000069, 100000000073, 100000000091]
+			//primes([899999999900,899999999999])
+			//[899999999903, 899999999929, 899999999947, 899999999959, 899999999981]
+			return zwBinString2NumHL(data,len,100000000003L,899999999981L);
 		}
 		return -1744;
 	}
@@ -245,15 +268,22 @@ YINBAO15_API int __stdcall zwYinBaoGetHashSM3(const char *inData,const int inLen
 
 
 
-YINBAO15_API int __stdcall zwYinBaoHash2Code( const char *inHexStr )
+YINBAO15_API int64_t __stdcall zwYinBaoHash2Code( const char *inHexStr,int CodeLen )
 {	
 	assert(NULL!=inHexStr && strlen(inHexStr)>0);
+	assert(CodeLen>=4 && CodeLen<=18);
 	if (NULL==inHexStr || strlen(inHexStr)==0)
 	{
 		return -1708;
 	}
 	char inHashBin256[ZWHASHLEN];
 	yb::myybHex2Bin(inHexStr,inHashBin256,ZWHASHLEN);
-	int ybn=yb::zwBinString2Num(inHashBin256,ZWHASHLEN,8);
+	int rCodeLen=CodeLen;
+	//如果不是可以接受的6，8，10，12位这几种长度，就默认值8位
+	if (6!=CodeLen && 8!=CodeLen && 10!=CodeLen && 12!=CodeLen)
+	{
+		rCodeLen=8;
+	}
+	int64_t ybn=yb::zwBinString2Num(inHashBin256,ZWHASHLEN,rCodeLen);
 	return ybn;
 };

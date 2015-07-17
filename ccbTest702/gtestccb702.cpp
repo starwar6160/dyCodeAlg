@@ -427,6 +427,7 @@ namespace CcbV11Test722Ecies {
 		printf("INFO1210:\n%s\n",zwMergePsk("aaaaaaaaaa"));
 	}
 
+
 	void yb714Test(const char *ybinput)
 	{	
 		const int ybLen=strlen(ybinput);
@@ -443,16 +444,17 @@ namespace CcbV11Test722Ecies {
 		}
 		printf("\n");
 #endif // _DEBUG715A1
-		uint32_t ybn=zwYinBaoHash2Code(outHash);
-		printf("印宝的输入第二阶段8位数字码结果是:\t%d\n",ybn);
+		int64_t ybn=zwYinBaoHash2Code(outHash,12);
+		printf("印宝的输入第二阶段8位数字码结果是:\t%lld\n",ybn);
 	}
 
 	//20150714.1714.印宝算法最基本组件测试
 	TEST_F(ECIES_Test, zwYinBaoTest714) {				
-		yb714Test("YBT1723");
-		yb714Test("YinBaoMsg714.1607");
-		yb714Test("YinBaoMsg714.1721.data1");
+		yb714Test("YBT1723.1");
+		yb714Test("YinBaoMsg714.1607.1");
+		yb714Test("YinBaoMsg714.1721.data1.1");
 	}
+
 
 
 //////////////////////////////////////////////////////////////////////////
