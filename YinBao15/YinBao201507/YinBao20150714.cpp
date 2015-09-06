@@ -255,7 +255,9 @@ YINBAO15_API int __stdcall jcGetHashSM3(const char *inData,const int inLength,ch
 	}
 	char outHashTmp[ZWHASHLEN];
 	memset(outHashTmp,0,ZWHASHLEN);
+#ifdef _DEBUG
 	printf("%s\n",__FUNCTION__);
+#endif // _DEBUG
 	SM3 sm3;
 	SM3_Init(&sm3);
 	yb::myybSM3Update(&sm3, inData,inLength);
