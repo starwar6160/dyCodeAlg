@@ -18,7 +18,6 @@
 #include <string>
 using std::string;
 
-
 void mySM3Update(SM3 * ctx, const char *data, const int len);
 void mySM3Update(SM3 * ctx, const int data);
 

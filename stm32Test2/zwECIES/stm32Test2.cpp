@@ -260,15 +260,20 @@ void myCCB3DESTest324();
 
 void myCCB3DESTest324()
 {
-	printf("%016I64X\n",myChar2Ui64("44556677"));
+	printf("%016I64X\n",myChar2Ui64("23456789"));
 	JC3DES_ERROR pchk1= myIsDESWeakKey("0123456789abcdef");
 	char outEncDyCode[16*2+1];
 	memset(outEncDyCode,0,16*2+1);
-	JC3DES_ERROR err= zwCCB3DESEncryptDyCode(
-		//"0123456789ABCDEF"
+	const char *tdesKey=		//"0123456789ABCDEF"
 		"1234567890123456"
 		//"0000000000000000"
-		,21436587,outEncDyCode);
+		//"AAAABBBBCCCCDDDD"
+;	int dyCodeSrc=19780417;
+	JC3DES_ERROR err= zwCCB3DESEncryptDyCode(tdesKey,dyCodeSrc,outEncDyCode);
+	int dyCodeDec=0;
+	zwCCB3DESDecryptDyCode(tdesKey,outEncDyCode,&dyCodeDec);
+	printf("dyCodeSrc=%d\tdyCodeDec=%d\n",dyCodeSrc,dyCodeDec);
+
 	if (JC3DES_OK==err)
 	{
 		printf("zwCCB3DESEncryptDyCode test result is %s\n",outEncDyCode);
@@ -315,8 +320,11 @@ void myECIESTest709ForArmTest()
 
 int main(int argc, char * argv[])
 {	
-	myECIESTest709ForArmTest();
-	//myCCB3DESTest324();
+	myCCB3DESTest324();
+	printf("\n\n\nmyJclmsTest20150306STM32Demo\n");
+	//myJclmsTest20150306STM32Demo();
+
+	//myECIESTest709ForArmTest();
 	//test4CCB3DES_ECB_EDE2();
 
 	//////////////////////////////////////////////////////////////////////////
@@ -329,7 +337,6 @@ int main(int argc, char * argv[])
 
 	//////////////////////////////////////////////////////////////////////////
 	//myJclmsTest20150305();
-	//myJclmsTest20150306STM32Demo();
 	//printf("%s\n",zw3desTest311("0123456789ABCDEF").c_str());
 
 

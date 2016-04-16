@@ -27,7 +27,9 @@ JC3DES_ERROR myIsDESWeakKey(const char *desKey);
 //使用建行的通讯加密密钥ccbComm3DESKeyHex把8位动态码dyCode加密，返回在出参outEncDyCodeHex中
 //其中通讯加密密钥，以及加密结果都是HEX字符串，动态码是整数
 JC3DES_ERROR zwCCB3DESEncryptDyCode(const char *ccbComm3DESKeyHex,const int dyCode,char *outEncDyCodeHex);
-
+//使用建行的通讯加密密钥ccbComm3DESKeyHex以及加密结果outEncDyCodeHex来解密，返回的8位动态码在出参dyCode中
+//其中通讯加密密钥，以及加密结果都是HEX字符串，动态码是整数
+JC3DES_ERROR zwCCB3DESDecryptDyCode( const char *ccbComm3DESKeyHex,const char *inEncedDyCodeHex,int *dyCode );
 #ifdef  __cplusplus
 }	//extern "C" {
 #endif

@@ -451,6 +451,17 @@ void myui64sprintf(ui64 n64,char *outHex)
 	sprintf(outHex,"%08X%08X",n1,n2);
 }
 
+ui64 myui64sscanf(const char *inHex)
+{
+	ui32 n1=0;
+	ui32 n2=0;
+	sscanf(inHex,"%08X%08X",&n1,&n2);
+	ui64 r=n1;
+	r=r<<32;
+	r=r+n2;
+	return r;
+}
+
 //把进来的64比特信息转换为64比特无符号整型
 ui64 myChar2Ui64(const char *inStr)
 {
@@ -678,4 +689,80 @@ JC3DES_ERROR zwCCB3DESEncryptDyCode( const char *ccbComm3DESKeyHex,const int dyC
 	return JC3DES_OK;
 }
 
+//微软有_strrev用来翻转字符串，ARM可能没有,这个函数留给ARM备用，20160416.2158.周伟
+void zwstrrev(char *p)
+{
+	char *q = p;
+	while(q && *q) ++q;
+	for(--q; p < q; ++p, --q)
+		*p = *p ^ *q,
+		*q = *p ^ *q,
+		*p = *p ^ *q;
+}
+
+//使用建行的通讯加密密钥ccbComm3DESKeyHex把8位动态码dyCode加密，返回在出参outEncDyCodeHex中
+//其中通讯加密密钥，以及加密结果都是HEX字符串，动态码是整数
+JC3DES_ERROR zwCCB3DESDecryptDyCode( const char *ccbComm3DESKeyHex,const char *inEncedDyCodeHex, int *dyCode )
+{
+	//检查输入参数
+	const int DESLEN=sizeof(ui64);	//一个3DES算法基本的64bit块大小的字节数
+	assert(NULL!=ccbComm3DESKeyHex);
+	assert(NULL!=dyCode);
+	int ccbKeyLen=myHexStringLength(ccbComm3DESKeyHex);
+
+	assert(16==ccbKeyLen);	
+	if (16!=ccbKeyLen)
+	{
+		printf("invalid ccbComm3DESKeyHex\n");
+		return JC3DES_KEY_INVALID_LENGTH;
+	}
+	if (NULL==inEncedDyCodeHex)
+	{
+		printf("NULL outEncDyCodeHex\n");
+		return JC3DES_OUTBUF_NULL;
+	}
+
+#ifdef _DEBUG
+	printf("ccbComm3DESKeyHex:%s\n",ccbComm3DESKeyHex);
+#endif // _DEBUG
+	ui64 dyCodePlain=0;
+
+	////////////////////////////////3DES加密//////////////////////////////////////////
+	char ccbKeyTmp[DESLEN*2+1];
+	memset(ccbKeyTmp,0,DESLEN*2+1);
+	memcpy(ccbKeyTmp,ccbComm3DESKeyHex,DESLEN*2);
+	//分别把A,B,A当作3DES EDE2的3个Key
+	//检查CCB原始64bit密钥，以及分解出来的2个64bit密钥是否弱密钥
+	ui64 key1=myChar2Ui64(ccbKeyTmp);
+	ui64 key2=myChar2Ui64(ccbKeyTmp+DESLEN);
+	if (	JC3DES_OK!=myIsDESWeakKey(ccbComm3DESKeyHex)
+		||	JC3DES_OK!=myIsDESWeakKeyBin(key1) 
+		||	JC3DES_OK!=myIsDESWeakKeyBin(key2)	)
+	{
+		printf("ERROR:WEAK 3DES KEY!\n");
+		return JC3DES_KEY_WEAKKEY;
+	}
+	key1=zwReverseByteOrder(key1);
+	key2=zwReverseByteOrder(key2);
+	DES3 des3(key1,key2,key1);		
+	ui64 aa=myui64sscanf(inEncedDyCodeHex);	
+	//解密出来的结果ui64数字，实际上是倒序的动态码的HEX格式的二进制形式
+	ui64 encDyCode=des3.decrypt(aa);
+	
+	//复制到tmpHex之后，按照字符串输出，可以看到倒序的动态码数字
+	char tmpHex[sizeof(encDyCode)+1];
+	memset(tmpHex,0,sizeof(encDyCode)+1);
+	memcpy(tmpHex,&encDyCode,sizeof(encDyCode));
+	char *rr=_strrev(tmpHex);
+	printf("3DES.2123 Decrypted dyCode is %s\n",rr);	
+	sscanf(rr,"%d",dyCode);
+	printf("dyCode result is %d\n",*dyCode);
+#ifdef _DEBUG
+	printf("encKey:%016I64X\n",encDyCode);
+	printf("dyCodePlain:%016I64X\n",dyCodePlain);
+	printf("K1:%016I64X K2:%016I64X K3:%016I64X \n",key1,key2,key1);
+	
+#endif // _DEBUG
+	return JC3DES_OK;
+}
 
