@@ -852,15 +852,16 @@ void zwGetPSK( const char *priKey,const char *ccbActiveInfo,char *PSK,time_t *or
 	strcpy(PSK,EciesDecryptCCB1503(priKey,ccbActiveInfo,origTime));
 }
 
-void zwGetPSKdemo( const char *priKey,const char *ccbActiveInfo)
+const char * zwGetPSKdemo( const char *priKey,const char *ccbActiveInfo )
 {
 	/////////////////////////////解密激活信息/////////////////////////////////////////////
-	char PSK[ZW_ECIES_HASH_LEN*2];
+	static char PSK[ZW_ECIES_HASH_LEN*2];
 	memset(PSK,0,ZW_ECIES_HASH_LEN*2);
 	time_t origTime=0;
 	//const char *wmTest954="BHy3c7f6oSpJVOq0ona/1VZ28SC18C53/eGAO5Tk7LwmEjUWdDaS1+kpfEjPLAGRXVaXP6NYvJG4qC8Gz9pUkz0=.KAB9g96yj7IqnlFfxIICo8Q0orLw5A8E.VQf0J0Tv6je2r9LZOie4Ihg9VbUyQR7ae1R5dATHTIBqvmdhFwO7PyVokiv58QrPqVZhy9vJIkdi8ytmgzxJSAoeThmewvfZHT+o2cabIoA=";
 	zwGetPSK(priKey,ccbActiveInfo,PSK,&origTime);
-	printf("PSK=\t%s \norigTime=\t%u\n",PSK,origTime);
+	//printf("PSK=\t%s \norigTime=\t%u\n",PSK,origTime);
+	return PSK;
 }
 
 
