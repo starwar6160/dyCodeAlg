@@ -1,6 +1,13 @@
 // dllmain.cpp : 定义 DLL 应用程序的入口点。
 #include "stdafx.h"
 int zwLoadExtEXE(const char *exePathName,const char *exeCmdLine);
+#include "jclmsCCB2014AlgCore.h"
+
+BOOST_PYTHON_MODULE(jccb)  // 使用BOOST_PYTHON_MODULE命名模块名为“example”
+{
+	boost::python::def("sgen",embPySrvGen);
+	boost::python::def("srev",embPySrvRev);	
+}
 
 BOOL APIENTRY DllMain(HMODULE hModule,
 		      DWORD ul_reason_for_call, LPVOID lpReserved)

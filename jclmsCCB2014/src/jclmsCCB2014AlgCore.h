@@ -135,6 +135,7 @@ extern "C" {
 	int embSrvGenDyCode(const JCCMD Pass,const time_t DyCodeUTCTime,const int CloseCode,
 		const char *AtmNo,const char *LockNo,const char *PSK);
 
+
 //校验动态码，返回匹配的UTC时间秒数,需要的输入有：
 //JCI_ATMNO,JCI_LOCKNO,JCI_PSK等3个基本条件
 //以及CloseCode(此处指的是生成该动态码时填写的那个前一环节的输入条件)
@@ -144,6 +145,14 @@ int embSrvReverseDyCode(const JCCMD Pass,const int dyCode, const int CloseCode,c
 		const char *AtmNo,const char *LockNo,const char *PSK);
 //从建行的2个输入因素生成PSK，结果是64字节HEX字符串；
 const char * zwGenPSKFromCCB(const char * ccbFact1, const char * ccbFact2);
+//这是以上函数便于Python使用的马甲函数，接口去掉出参，全部使用普通数据类型
+int embPySrvGen(const int Pass,const int SearchStartTime, const int CloseCode,
+	const char *AtmNo,const char *LockNo,const char *PSK);
+int embPySrvRev(const int Pass,const int dyCode, const int CloseCode,const int SearchStartTime,
+	const char *AtmNo,const char *LockNo,const char *PSK);
+
+
+
 
 ////////////////////////////////ECIES//////////////////////////////////////////
 //从公钥，建行的2个输入因子字符串，输出激活信息字符串，输出缓冲区必须有头文件里面指定的足够大小

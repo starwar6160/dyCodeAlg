@@ -745,6 +745,19 @@ int embSrvGenDyCode(const JCCMD Pass,const time_t DyCodeUTCTime,const int CloseC
 	return pass1DyCode;
 }
 
+int embPySrvGen(const int Pass,const int SearchStartTime, const int CloseCode,
+	const char *AtmNo,const char *LockNo,const char *PSK)
+{
+	return embSrvGenDyCode(static_cast<JCCMD>(Pass),SearchStartTime,CloseCode,AtmNo,LockNo,PSK);
+}
+
+int embPySrvRev(const int Pass,const int dyCode, const int CloseCode,const int SearchStartTime,
+	const char *AtmNo,const char *LockNo,const char *PSK)
+{
+	return embSrvReverseDyCode(static_cast<JCCMD>(Pass),dyCode,CloseCode,SearchStartTime,AtmNo,LockNo,PSK);
+}
+
+
 //校验动态码，返回匹配的UTC时间秒数,需要的输入有：
 //JCI_ATMNO,JCI_LOCKNO,JCI_PSK等3个基本条件
 //以及CloseCode(此处指的是生成该动态码时填写的那个前一环节的输入条件)

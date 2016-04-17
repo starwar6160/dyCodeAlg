@@ -54,6 +54,10 @@ typedef void *            *LPVOID;	//此处和windef.h不太一样，去掉了过时的far关键
 #endif
 #endif
 
+#include <iostream>
+#include <boost/python.hpp>
+using std::cout;
+
 #ifdef  __cplusplus
 extern "C" {
 #endif
