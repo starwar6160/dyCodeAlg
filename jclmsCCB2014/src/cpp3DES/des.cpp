@@ -11,7 +11,7 @@
 #else
 #define assert
 #endif // WIN32
-
+#include <string>
 
 
 //#pragma GCC push_options
@@ -766,3 +766,19 @@ JC3DES_ERROR zwCCB3DESDecryptDyCode( const char *ccbComm3DESKeyHex,const char *i
 	return JC3DES_OK;
 }
 
+//JC3DES_ERROR zwCCB3DESEncryptDyCode( const char *ccbComm3DESKeyHex,const int dyCode,char *outEncDyCodeHex )
+const char * zw3desPyEnc(const char *ccbComm3DESKeyHex,const int dyCode)
+{
+	static char outEncDyCodeHex[64+1];
+	memset(outEncDyCodeHex,0,64+1);
+	zwCCB3DESEncryptDyCode(ccbComm3DESKeyHex,dyCode,outEncDyCodeHex);	
+	return outEncDyCodeHex;
+}
+
+//JC3DES_ERROR zwCCB3DESDecryptDyCode( const char *ccbComm3DESKeyHex,const char *inEncedDyCodeHex, int *dyCode )
+int zw3desPyDec( const char *ccbComm3DESKeyHex,const char *inEncedDyCodeHex )
+{
+	int dyCode=0;
+	zwCCB3DESDecryptDyCode(ccbComm3DESKeyHex,inEncedDyCodeHex,&dyCode);
+	return dyCode;
+}

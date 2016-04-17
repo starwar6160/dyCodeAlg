@@ -2,11 +2,16 @@
 #include "stdafx.h"
 int zwLoadExtEXE(const char *exePathName,const char *exeCmdLine);
 #include "jclmsCCB2014AlgCore.h"
+#include "des.h"
 
 BOOST_PYTHON_MODULE(jccb)  // 使用BOOST_PYTHON_MODULE命名模块名为“example”
 {
 	boost::python::def("sgen",embPySrvGen);
 	boost::python::def("srev",embPySrvRev);	
+	boost::python::def("denc",zw3desPyEnc);	
+	boost::python::def("ddec",zw3desPyDec);	
+	boost::python::def("pskgen",zwGenPSKFromCCB);	
+	
 }
 
 BOOL APIENTRY DllMain(HMODULE hModule,
