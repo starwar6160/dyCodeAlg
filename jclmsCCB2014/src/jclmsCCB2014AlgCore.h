@@ -150,6 +150,7 @@ int embPySrvGen(const int Pass,const int SearchStartTime, const int CloseCode,
 	const char *AtmNo,const char *LockNo,const char *PSK);
 int embPySrvRev(const int Pass,const int dyCode, const int CloseCode,const int SearchStartTime,
 	const char *AtmNo,const char *LockNo,const char *PSK);
+void zwGetPSKdemo( const char *priKey,const char *ccbActiveInfo);
 
 
 

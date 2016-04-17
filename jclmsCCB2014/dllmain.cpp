@@ -11,6 +11,7 @@ BOOST_PYTHON_MODULE(jccb)  // 使用BOOST_PYTHON_MODULE命名模块名为“example”
 	boost::python::def("denc",zw3desPyEnc);	
 	boost::python::def("ddec",zw3desPyDec);	
 	boost::python::def("pskgen",zwGenPSKFromCCB);	
+	boost::python::def("pskget",zwGetPSKdemo);	
 	
 }
 

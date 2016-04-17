@@ -754,9 +754,9 @@ JC3DES_ERROR zwCCB3DESDecryptDyCode( const char *ccbComm3DESKeyHex,const char *i
 	memset(tmpHex,0,sizeof(encDyCode)+1);
 	memcpy(tmpHex,&encDyCode,sizeof(encDyCode));
 	char *rr=_strrev(tmpHex);
-	printf("3DES.2123 Decrypted dyCode is %s\n",rr);	
+	//printf("3DES.2123 Decrypted dyCode is %s\n",rr);	
 	sscanf(rr,"%d",dyCode);
-	printf("dyCode result is %d\n",*dyCode);
+	//printf("dyCode result is %d\n",*dyCode);
 #ifdef _DEBUG
 	printf("encKey:%016I64X\n",encDyCode);
 	printf("dyCodePlain:%016I64X\n",dyCodePlain);
