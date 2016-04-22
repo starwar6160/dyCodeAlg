@@ -864,6 +864,19 @@ const char * zwGetPSKdemo( const char *priKey,const char *ccbActiveInfo )
 	return PSK;
 }
 
+//从公钥，建行的2个输入因子字符串，输出激活信息字符串，输出缓冲区必须有头文件里面指定的足够大小
+void zwGenActiveInfo(const char *pubkey,const char *ccbFact1,const char *ccbFact2,
+	const time_t nowTime,char *ccbActiveInfo);
+
+//从两个建行输入因子，公钥，时间，生成激活信息字符串
+const char * zwPyGenActInfo(const char *pubkey,const char *ccbFact1,const char *ccbFact2,
+	const int nowTime)
+{
+	static char ccbActiveInfo[ZW_ECIES_CRYPT_TOTALLEN];
+	memset(ccbActiveInfo,0,ZW_ECIES_CRYPT_TOTALLEN);
+	zwGenActiveInfo(pubkey,ccbFact1,ccbFact2,nowTime,ccbActiveInfo);
+	return ccbActiveInfo;
+}
 
 ////////////////////////////////3DES//////////////////////////////////////////
 string zwCode8ToHex(int Code8)

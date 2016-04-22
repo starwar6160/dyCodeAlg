@@ -151,6 +151,10 @@ int embPySrvGen(const int Pass,const int SearchStartTime, const int CloseCode,
 int embPySrvRev(const int Pass,const int dyCode, const int CloseCode,const int SearchStartTime,
 	const char *AtmNo,const char *LockNo,const char *PSK);
 const char * zwGetPSKdemo( const char *priKey,const char *ccbActiveInfo);
+//从两个建行输入因子，公钥，时间，生成激活信息字符串
+const char * zwPyGenActInfo(const char *pubkey,const char *ccbFact1,const char *ccbFact2,
+	const int nowTime);
+
 
 
 
