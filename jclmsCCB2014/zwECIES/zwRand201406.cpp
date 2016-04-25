@@ -45,15 +45,20 @@ char g_zwPskBuf[SHA256_DIGEST_SIZE];
 char g_zwPskAsc[SHA256_DIGEST_SIZE*2+1];
 ZWECIES_API const char * zwMergePsk(const char *pskInput)
 {
-	//现在特地把rnd初始化为一个已知值，为的是给建行的版本添加一个固定，但是我们以后可以更改的第三因素；
-	time_t rnd=20141210;
 	memset(g_zwPskBuf,0,sizeof(g_zwPskBuf));
 	memset(g_zwPskAsc,0,sizeof(g_zwPskAsc));
 	sha256_ctx shactx;
+	memset(&shactx,0,sizeof(sha256_ctx));
 	sha256_init(&shactx);
 
 	sha256_update(&shactx,(unsigned char *)pskInput,strlen(pskInput));
-	sha256_update(&shactx,(unsigned char *)&rnd,sizeof(rnd));
+	//现在特地把rnd初始化为一个已知值，为的是给建行的版本添加一个固定，但是我们以后可以更改的第三因素；
+	//将rnd变为一个字符串，为的是避免PC和ARM之间的字节序不一致问题。20160425.1611.周伟
+	int rnd=20141210;
+	char bRnd[16];	//16字节肯定足以容纳32位整数转换的字符串，还有多余的0结束符的空间
+	memset(bRnd,0,16);
+	sprintf(bRnd,"%d",rnd);
+	sha256_update(&shactx,(unsigned char *)bRnd,strlen(bRnd));
 	sha256_final(&shactx,(unsigned char *)g_zwPskBuf);
 	for (int i=0;i<SHA256_DIGEST_SIZE;i++)
 	{
