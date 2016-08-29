@@ -13,3 +13,8 @@ JcLockGetVersion
 JcLockDebugPrint
 zwJcLockDumpJCINPUT
 zwSM3StandardTestVector
+zwGenPSKFromCCB
+embGenActInfo
+embDecActInfo
+embSrvCodeGen
+embSrvCodeRev

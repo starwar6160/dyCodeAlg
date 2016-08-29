@@ -52,7 +52,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\jclmsCCB2014\src;$(ZWLIB)\MIRACL2014\MIRACL2014\miraclSrc\include\;$(ZWSRC)\jclmsCCB2014\jclmsCCB2014\zwECIES;$(ZWLIB)\gtest\include\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\jclmsCCB2014\src;$(ZWLIB)\MIRACL2014\MIRACL2014\miraclSrc\include\;$(ZWSRC)\jclmsCCB14\jclmsCCB2014\zwECIES;$(ZWLIB)\gtest\include\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -72,7 +72,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\jclmsCCB2014\src;$(ZWLIB)\MIRACL2014\MIRACL2014\miraclSrc\include\;$(ZWSRC)\jclmsCCB2014\jclmsCCB2014\zwECIES;$(ZWLIB)\gtest\include\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\jclmsCCB2014\src;$(ZWLIB)\MIRACL2014\MIRACL2014\miraclSrc\include\;$(ZWSRC)\jclmsCCB14\jclmsCCB2014\zwECIES;$(ZWLIB)\gtest\include\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

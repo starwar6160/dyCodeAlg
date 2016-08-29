@@ -21,6 +21,8 @@ using std::string;
 void mySM3Update(SM3 * ctx, const char *data, const int len);
 void mySM3Update(SM3 * ctx, const int data);
 
+#define _DEBUG14
+
 #ifdef  __cplusplus
 extern "C" {
 #endif
@@ -745,13 +747,13 @@ int embSrvGenDyCode(const JCCMD Pass,const time_t DyCodeUTCTime,const int CloseC
 	return pass1DyCode;
 }
 
-int embPySrvGen(const int Pass,const int SearchStartTime, const int CloseCode,
+int embSrvCodeGen(const int Pass,const int SearchStartTime, const int CloseCode,
 	const char *AtmNo,const char *LockNo,const char *PSK)
 {
 	return embSrvGenDyCode(static_cast<JCCMD>(Pass),SearchStartTime,CloseCode,AtmNo,LockNo,PSK);
 }
 
-int embPySrvRev(const int Pass,const int dyCode, const int CloseCode,const int SearchStartTime,
+int embSrvCodeRev(const int Pass,const int dyCode, const int CloseCode,const int SearchStartTime,
 	const char *AtmNo,const char *LockNo,const char *PSK)
 {
 	return embSrvReverseDyCode(static_cast<JCCMD>(Pass),dyCode,CloseCode,SearchStartTime,AtmNo,LockNo,PSK);
@@ -842,7 +844,7 @@ void zwGenKeyPair(char *pubKey,char *priKey)
 
 
 //从私钥，激活信息，获取PSK，输出缓冲区必须有头文件里面指定的足够大小
-void zwGetPSK( const char *priKey,const char *ccbActiveInfo,char *PSK,time_t *origTime )
+void embGetPSK2( const char *priKey,const char *ccbActiveInfo,char *PSK,time_t *origTime )
 {
 	if (NULL==priKey || NULL==ccbActiveInfo || NULL==PSK
 		||0==strlen(priKey) || 0==strlen(ccbActiveInfo))
@@ -852,14 +854,14 @@ void zwGetPSK( const char *priKey,const char *ccbActiveInfo,char *PSK,time_t *or
 	strcpy(PSK,EciesDecryptCCB1503(priKey,ccbActiveInfo,origTime));
 }
 
-const char * zwGetPSKdemo( const char *priKey,const char *ccbActiveInfo )
+const char * embDecActInfo( const char *priKey,const char *ccbActiveInfo )
 {
 	/////////////////////////////解密激活信息/////////////////////////////////////////////
 	static char PSK[ZW_ECIES_HASH_LEN*2];
 	memset(PSK,0,ZW_ECIES_HASH_LEN*2);
 	time_t origTime=0;
 	//const char *wmTest954="BHy3c7f6oSpJVOq0ona/1VZ28SC18C53/eGAO5Tk7LwmEjUWdDaS1+kpfEjPLAGRXVaXP6NYvJG4qC8Gz9pUkz0=.KAB9g96yj7IqnlFfxIICo8Q0orLw5A8E.VQf0J0Tv6je2r9LZOie4Ihg9VbUyQR7ae1R5dATHTIBqvmdhFwO7PyVokiv58QrPqVZhy9vJIkdi8ytmgzxJSAoeThmewvfZHT+o2cabIoA=";
-	zwGetPSK(priKey,ccbActiveInfo,PSK,&origTime);
+	embGetPSK2(priKey,ccbActiveInfo,PSK,&origTime);
 	//printf("PSK=\t%s \norigTime=\t%u\n",PSK,origTime);
 	return PSK;
 }
@@ -869,7 +871,7 @@ void zwGenActiveInfo(const char *pubkey,const char *ccbFact1,const char *ccbFact
 	const time_t nowTime,char *ccbActiveInfo);
 
 //从两个建行输入因子，公钥，时间，生成激活信息字符串
-const char * zwPyGenActInfo(const char *pubkey,const char *ccbFact1,const char *ccbFact2,
+const char * embGenActInfo(const char *pubkey,const char *ccbFact1,const char *ccbFact2,
 	const int nowTime)
 {
 	static char ccbActiveInfo[ZW_ECIES_CRYPT_TOTALLEN];

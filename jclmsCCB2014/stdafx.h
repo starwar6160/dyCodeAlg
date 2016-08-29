@@ -55,7 +55,9 @@ typedef void *            *LPVOID;	//此处和windef.h不太一样，去掉了过时的far关键
 #endif
 
 #include <iostream>
+#ifdef _ZWEXP_PYTHON1608
 #include <boost/python.hpp>
+#endif // _ZWEXP_PYTHON1608
 using std::cout;
 
 #ifdef  __cplusplus

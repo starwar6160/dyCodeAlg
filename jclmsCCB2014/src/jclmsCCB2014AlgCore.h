@@ -132,7 +132,7 @@ extern "C" {
 //在生成第一开锁码时填写的是前一次的闭锁码，生成验证码时填写的是第一开锁码，生成第二开锁码时填写的是验证码
 //atm编号，锁编号都是不超过一定长度限度的随意的字符串，PSK是定长64字节HEX字符串相关长度限制请见头文件
 //DyCodeUTCTime为指定动态码的时间UTC秒数，一般都是当前时间，但也可以为将来提前生成动态码而指定将来的时间
-	int embSrvGenDyCode(const JCCMD Pass,const time_t DyCodeUTCTime,const int CloseCode,
+JCLMSCCB2014_API 	int embSrvGenDyCode(const JCCMD Pass,const time_t DyCodeUTCTime,const int CloseCode,
 		const char *AtmNo,const char *LockNo,const char *PSK);
 
 
@@ -141,19 +141,23 @@ extern "C" {
 //以及CloseCode(此处指的是生成该动态码时填写的那个前一环节的输入条件)
 //JCCMD指示校验的是哪一类的动态码
 //SearchStartTime指定搜索起始时间，一般情况下就是当前时间的UTC秒数
-int embSrvReverseDyCode(const JCCMD Pass,const int dyCode, const int CloseCode,const time_t SearchStartTime,
-		const char *AtmNo,const char *LockNo,const char *PSK);
+ int embSrvReverseDyCode(const JCCMD Pass,const int dyCode, const int CloseCode,
+	 const time_t SearchStartTime,const char *AtmNo,const char *LockNo,const char *PSK);
 //从建行的2个输入因素生成PSK，结果是64字节HEX字符串；
-const char * zwGenPSKFromCCB(const char * ccbFact1, const char * ccbFact2);
-//这是以上函数便于Python使用的马甲函数，接口去掉出参，全部使用普通数据类型
-int embPySrvGen(const int Pass,const int SearchStartTime, const int CloseCode,
+ const char * zwGenPSKFromCCB(const char * ccbFact1, const char * ccbFact2);
+
+//以下是便于外部高级语言使用的接口函数，参数中去掉出参，全部使用普通数据类型
+ //该函数从两个建行输入因子，公钥，时间，生成激活信息字符串
+ JCLMSCCB2014_API const char * embGenActInfo(const char *pubkey,const char *ccbFact1,const char *ccbFact2,
+	 const int nowTime);
+ //该函数用于从激活信息中解码出来有效成分也就是PSK
+ JCLMSCCB2014_API const char * embDecActInfo( const char *priKey,const char *ccbActiveInfo);
+ //该函数用于生成动态码
+JCLMSCCB2014_API int embSrvCodeGen(const int Pass,const int SearchStartTime, const int CloseCode,
 	const char *AtmNo,const char *LockNo,const char *PSK);
-int embPySrvRev(const int Pass,const int dyCode, const int CloseCode,const int SearchStartTime,
-	const char *AtmNo,const char *LockNo,const char *PSK);
-const char * zwGetPSKdemo( const char *priKey,const char *ccbActiveInfo);
-//从两个建行输入因子，公钥，时间，生成激活信息字符串
-const char * zwPyGenActInfo(const char *pubkey,const char *ccbFact1,const char *ccbFact2,
-	const int nowTime);
+//该函数用于反推动态码
+JCLMSCCB2014_API int embSrvCodeRev(const int Pass,const int dyCode, const int CloseCode,
+	const int SearchStartTime,const char *AtmNo,const char *LockNo,const char *PSK);
 
 
 
@@ -166,7 +170,7 @@ void zwGenActiveInfo(const char *pubkey,const char *ccbFact1,const char *ccbFact
 //生成公钥私钥对,输入缓冲区必须有头文件里面宏定义值所指定的足够大小
 void zwGenKeyPair(char *pubKey,char *priKey);
 //从私钥，激活信息，获取PSK，输出缓冲区必须有头文件里面指定的足够大小
-void zwGetPSK(const char *priKey,const char *ccbActiveInfo,char *PSK,time_t *origTime);
+void embGetPSK2(const char *priKey,const char *ccbActiveInfo,char *PSK,time_t *origTime);
 
 
 

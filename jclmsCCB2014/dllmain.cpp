@@ -4,17 +4,19 @@ int zwLoadExtEXE(const char *exePathName,const char *exeCmdLine);
 #include "jclmsCCB2014AlgCore.h"
 #include "des.h"
 
+#ifdef _ZWEXP_PYTHON1608
 BOOST_PYTHON_MODULE(jccb)  // 使用BOOST_PYTHON_MODULE命名模块名为“example”
 {
-	boost::python::def("sgen",embPySrvGen);
-	boost::python::def("srev",embPySrvRev);	
+	boost::python::def("sgen",embSrvCodeGen);
+	boost::python::def("srev",embSrvCodeRev);	
 	boost::python::def("denc",zw3desPyEnc);	
 	boost::python::def("ddec",zw3desPyDec);	
 	boost::python::def("pskgen",zwGenPSKFromCCB);	
-	boost::python::def("pskget",zwGetPSKdemo);	
-	boost::python::def("actgen",zwPyGenActInfo);	
+	boost::python::def("pskget",embDecActInfo);	
+	boost::python::def("actgen",embGenActInfo);	
 	
 }
+#endif // _ZWEXP_PYTHON1608
 
 BOOL APIENTRY DllMain(HMODULE hModule,
 		      DWORD ul_reason_for_call, LPVOID lpReserved)

@@ -105,7 +105,7 @@ void myECIESTest305ForArm()
 	char PSK[ZW_ECIES_HASH_LEN*2];
 	memset(PSK,0,ZW_ECIES_HASH_LEN*2);
 	time_t origTime=0;
-	zwGetPSK(priKey,ccbActiveInfo,PSK,&origTime);
+	embGetPSK2(priKey,ccbActiveInfo,PSK,&origTime);
 	printf("PSK=\t%s \norigTime=\t%u\n",PSK,origTime);
 }
 
@@ -138,7 +138,7 @@ void myECIESTest326ForArmTest1WM()
 	memset(PSK,0,ZW_ECIES_HASH_LEN*2);
 	time_t origTime=0;
 	const char *wmTest954="BHy3c7f6oSpJVOq0ona/1VZ28SC18C53/eGAO5Tk7LwmEjUWdDaS1+kpfEjPLAGRXVaXP6NYvJG4qC8Gz9pUkz0=.KAB9g96yj7IqnlFfxIICo8Q0orLw5A8E.VQf0J0Tv6je2r9LZOie4Ihg9VbUyQR7ae1R5dATHTIBqvmdhFwO7PyVokiv58QrPqVZhy9vJIkdi8ytmgzxJSAoeThmewvfZHT+o2cabIoA=";
-	zwGetPSK(priKey,wmTest954,PSK,&origTime);
+	embGetPSK2(priKey,wmTest954,PSK,&origTime);
 	printf("PSK=\t%s \norigTime=\t%u\n",PSK,origTime);
 }
 
@@ -313,7 +313,7 @@ void myECIESTest709ForArmTest()
 	memset(PSK,0,ZW_ECIES_HASH_LEN*2);
 	time_t origTime=0;
 	const char *panfeiTest1518="BNRW+I+aavhzpfHm2ZFLnLqYXYKmcSWZ3Xj1bQ5ejQAOBNVceXhcyfKwGKp01mEzBL11907NxlP98iCzkbu4CdI=.3D+2dOuRjAj2q9Z\/YEbOhIerOrc6+96U.qnJt5n\/8YV8X\/y6DPGPDwxaISzOYvVneMkm7g2+\/6PJAfDl\/FKVqakzFq6DcNQnjkC5iBXzv8gUwwBuYXyJlyx3ObpEwA0hMvQ31eXxKpjQ=";
-	zwGetPSK(priKey,panfeiTest1518,PSK,&origTime);
+	embGetPSK2(priKey,panfeiTest1518,PSK,&origTime);
 	printf("PSK=\t%s \norigTime=\t%u\n",PSK,origTime);
 }
 

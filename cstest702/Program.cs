@@ -859,6 +859,7 @@ namespace cstest702
         static void Main(string[] args)
         {
             //myECIESTestOld1();
+            myV11DynaCodeTest();
             //324GZ dyCodeHexStr=3231343336353837   ("21436587")
             string dyEnc = DES3Encrypt("3231343336353837",
                 "1234567890123456");

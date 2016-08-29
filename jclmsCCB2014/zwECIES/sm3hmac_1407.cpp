@@ -152,4 +152,4 @@ int zwSM3StandardTestVector4FuDan20150211(void) {
 	}
 	printf("\n");
 	return sm3TestVecResult1[0]-NtoHl(oTmp[0]);
-}
+} 
