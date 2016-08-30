@@ -10,7 +10,10 @@
 #include <string>
 #include <assert.h>
 #include <string>
+#include <iostream>
 using std::string;
+using std::cout;
+using std::endl;
 #include "des.h"
 
 extern "C"
@@ -317,11 +320,14 @@ void myECIESTest709ForArmTest()
 	printf("PSK=\t%s \norigTime=\t%u\n",PSK,origTime);
 }
 
+void myWangJiHuExample20160830(void);
+
 
 int main(int argc, char * argv[])
 {	
-	myCCB3DESTest324();
-	printf("\n\n\nmyJclmsTest20150306STM32Demo\n");
+	myWangJiHuExample20160830();
+	//myCCB3DESTest324();
+	//printf("\n\n\nmyJclmsTest20150306STM32Demo\n");
 	//myJclmsTest20150306STM32Demo();
 
 	//myECIESTest709ForArmTest();
@@ -346,4 +352,91 @@ int main(int argc, char * argv[])
 	//EciesEncryptCCB1503("ECIESPUBKEY","ECIESPLAINTEXT",time(NULL));
 
 	return 0;
+}
+
+void myWangJiHuExample20160830(void)
+{
+////////////////////////////////初始化，设置各方面的//////////////////////////////////////////
+	//预先设置好的生成的一对非对称密钥，是Base64编码的二进制内容
+	//该公钥私钥对使用zwGenKeyPair函数生成，此处就用生成好的值；
+	// 锁具使用该函数生成公钥私钥对，然后把公钥放在0000报文结果里面返回
+	// 椭圆曲线加密算法公钥
+	const char *pubkey="BFlfjkxoiRZFdjQKa/W1JWBwFx+FPyzcFGqXjnlVzMcvIAQyK3C1Ha+G2uGUM4nX5khPQP5AiPFiCyuH2WxZefg=";
+	//椭圆曲线加密算法私钥
+	const char *prikey="y+tgryY83ibv2RaQeb93a97+JX0/9cpWf4MrmUUtrzs=";
+	cout<<"椭圆曲线加密算法公钥="<<pubkey<<endl;
+	cout<<"椭圆曲线加密算法私钥="<<prikey<<"该值需要严格保密，不能传出锁具以外"<<endl;
+	//char aaPubKey[128];
+	//char aaPriKey[32];
+	//zwGenKeyPair(aaPubKey,aaPriKey);
+	//此处是VH向密码服务器灌注根密钥报文的实际代码，两个输入因子，生成的
+	// ccbPSK被保存在密码服务器内部，作为以后生成各种动态码的根密钥；
+	const char *ccbFact1="A1B1C1D1A1B1C1D1";
+	const char *ccbFact2="A2B2C2D2A2B2C2D2";
+	cout<<"根密钥的两个输入因子分别是"<<ccbFact1<<" 和 "<<ccbFact2<<endl;
+	string ccbPSK=zwGenPSKFromCCB(ccbFact1,ccbFact2);
+	cout<<"ccbPSK是 "<<ccbPSK<<"\n该值需要高度保密不能出密码服务器和锁具的硬件之外，不能包括在任何报文中"<<endl;
+	//ccbPSK接下来被各个锁具不同的公钥加密后的形式成为激活信息，在“请求
+	//锁具激活信息”报文的结果中返回；
+	// 第四个参数是GMT秒数，自从1970年算起来的，大约是一个14开头的10位整数
+	// 第四个参数存在的原因是建行要求给同一把锁在不同时间生成的激活信息内容
+	// 各不相同，防止重放攻击。但是这些不同的激活信息解密出来结果是一样的
+	string actInfo=embGenActInfo(pubkey,ccbFact1,ccbFact2,time(NULL));
+	cout<<"激活信息是\t"<<actInfo<<endl;
+	//接下来，actInfo通过0001报文发给锁具，锁具在内部通过prikey解密出来ccbPSK
+	string decedPsk= embDecActInfo(prikey,actInfo.c_str());
+	cout<<"锁具用自己的私钥解密出来的来自密码服务器的激活信息中的PSK如下，"
+		"请自己去掉句号以及后面的GMT秒数\n"<<decedPsk<<endl;
+
+	//以下是生成动态码和验证动态码的部分
+	//其中需要用到枚举类型jc_cmd_type里面的各个值，C/C++的枚举是第一个元素为0
+	// 第二个为1，以此类推，所以JCCMD_INIT_CLOSECODE的值是1，其他语言请
+	// 参照该值定义一个枚举，以便代码可读性更高
+	const char *myAtmNo="atmno830a1";
+	const char *myLockNo="lockNo1019";
+	//第一个参数参见枚举jc_cmd_type，也可以直接传入1，指明要生成初始闭锁码
+	//初始闭锁码存在是因为每个第一开锁码都要求前一次的闭锁码作为因素来生成
+	// 而最开始第一次开锁时还不存在开锁码，所以定义了一个初始闭锁码的概念
+	// 所以初始闭锁码只应该在一个锁具第一次开锁时生成1次；密码服务器和锁具
+	// 双方都持有相同的ATM编号，锁具编号，以及使用前面的初始化步骤交换一致
+	// 的PSK，所以双方都用该函数生成了相同的初始闭锁码用于余下的动态码生成
+	// 步骤
+	// 第二个参数SearchStartTime，是指明要为什么时间生成动态码。建行的场景
+	// 一般都是现生成马上就用的，所以此处直接取值当前时间。我们也可以生成
+	// 将来某个时间的动态码；
+	// 第三个参数是闭锁码，此处生成初始闭锁码时该值无效，传入0即可。以后第一
+	// 开锁码，锁具验证码，第二开锁码，最后关锁时的闭锁码，这些动态码生成的
+	//时候，每次都传入上一个步骤的动态码在这个参数位置上
+	// 密码服务器和锁具各自生成初始闭锁码
+	int initCloseCode= embSrvCodeGen(JCCMD_INIT_CLOSECODE,time(NULL),0,
+		myAtmNo,myLockNo,decedPsk.c_str());
+	cout<<"初始闭锁码是\t"<<initCloseCode<<endl;
+	//密码服务器生成第一开锁码
+	//请注意此处生成第一开锁码，不同之处仅仅在于，参数1的动态码类型不同，参数2
+	//的动态码目标时间不同(考虑到建行的场景一般都是马上使用所以目标时间一般都
+	// 取的是当前时间，其他场景可以考虑不同的时间),参数3填写了初始动态码
+	int passCode1=embSrvCodeGen(JCCMD_CCB_DYPASS1,time(NULL),initCloseCode,myAtmNo,myLockNo,decedPsk.c_str());
+	cout<<"第一开锁码是\t"<<passCode1<<endl;
+	//锁具验证第一开锁码是否合法
+	int pass1SrcTime= embSrvCodeRev(JCCMD_CCB_DYPASS1,passCode1,initCloseCode,time(NULL),myAtmNo,myLockNo,decedPsk.c_str());
+	cout<<"验证第一开锁码对应的生成时间结果如下，如果为0就是验证失败.此外该值应该在当前时间之前但是不超过5分钟范围\t"<<pass1SrcTime<<endl;
+	//锁具生成验证码
+	int verCode=embSrvCodeGen(JCCMD_CCB_LOCK_VERCODE,time(NULL),passCode1,myAtmNo,myLockNo,decedPsk.c_str());
+	cout<<"锁具生成的验证码如下，该值会通过主动和被动两条验证码报文传给VH\t"<<verCode<<endl;
+	//密码服务器在生成第二开锁码之前验证锁具的验证码是否合法
+	int verCodeSrcTime= embSrvCodeRev(JCCMD_CCB_LOCK_VERCODE,verCode,passCode1,time(NULL),myAtmNo,myLockNo,decedPsk.c_str());
+	cout<<"验证码生成时间是\t"<<verCodeSrcTime<<endl;
+	//验证码合法的话，密码服务器生成第二开锁码
+	int passCode2=embSrvCodeGen(JCCMD_CCB_DYPASS2,time(NULL),verCode,myAtmNo,myLockNo,decedPsk.c_str());
+	cout<<"第二开锁码是\t"<<passCode2<<endl;
+	//锁具验证第二开锁码是否合法
+	int pass2SrcTime= embSrvCodeRev(JCCMD_CCB_DYPASS2,passCode2,verCode,time(NULL),myAtmNo,myLockNo,decedPsk.c_str());
+	cout<<"第二开锁码生成时间是\t"<<pass2SrcTime<<endl;
+	//验证成功第二开锁码后，开锁成功，操作完毕关锁以后锁具生成闭锁码
+	int endCloseCode= embSrvCodeGen(JCCMD_CCB_CLOSECODE,time(NULL),passCode2,myAtmNo,myLockNo,decedPsk.c_str());
+	cout<<"闭锁码是\t"<<endCloseCode<<endl;
+	//VH验证闭锁码的合法性：
+	int encCloseCodeSrcTime= embSrvCodeRev(JCCMD_CCB_CLOSECODE,endCloseCode,passCode2,time(NULL),myAtmNo,myLockNo,decedPsk.c_str());
+	cout<<"闭锁码生成时间是\t"<<encCloseCodeSrcTime<<endl;
+	//以上每个步骤之间都环环相扣，生成下一个步骤的动态码时，在生成函数中有上一个动态码作为输入，验证时也是如此
 }
