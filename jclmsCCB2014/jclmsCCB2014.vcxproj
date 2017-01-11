@@ -52,7 +52,7 @@
       <WarningLevel>Level1</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;ZWECIES_EXPORTS;_DEBUG;_WINDOWS;_USRDLL;JCLMSCCB2014_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(ZWSRC)\zwBaseLib\zwBaseLib\Header;$(ZWSRC)\CCBelock\CCBelock\hidCode;$(ZWLIB)\MIRACL2014\MIRACL2014\miraclSrc\include\;.\src\crc32;.\src\cpp3DES;.\src;.\zwECIES;$(ZWSRC)\zwBaseLib\zwBaseLib\HidSplitMsg;$(ZWSRC)\zwBaseLib\zwBaseLib\SecretBox;$(ZWSRC)\jclmsCCB2014\jclmsCCB2014\src\secBox;$(BOOST)\;$(ZWPYTHON)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\zwWorkSRC\jclmsccb14\stm32Test2\zwMiracl;C:\zwWorkSRC\zwBaseLib\zwBaseLib\SecretBox;C:\zwWorkSRC\jclmsccb14\jclmsCCB2014\src\secBox;C:\zwWorkSRC\zwBaseLib\zwBaseLib\HidSplitMsg;$(ZWSRC)\zwBaseLib\zwBaseLib\Header;$(ZWSRC)\CCBelock\CCBelock\hidCode;$(ZWLIB)\MIRACL2014\MIRACL2014\miraclSrc\include\;.\src\crc32;.\src\cpp3DES;.\src;.\zwECIES;$(ZWSRC)\zwBaseLib\zwBaseLib\HidSplitMsg;$(ZWSRC)\zwBaseLib\zwBaseLib\SecretBox;$(ZWSRC)\jclmsCCB2014\jclmsCCB2014\src\secBox;$(BOOST)\;$(ZWPYTHON)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableLanguageExtensions>false</DisableLanguageExtensions>
       <DisableSpecificWarnings>4731;4819</DisableSpecificWarnings>
       <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
@@ -62,9 +62,9 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <OutputFile>$(ZWSRC)\2014BinOut\$(Configuration)\$(TargetName)$(TargetExt)</OutputFile>
-      <AdditionalLibraryDirectories>$(ZWSRC)\2014BinOut\$(Configuration);$(ZWLIB)\MIRACL2014\$(Configuration);$(ZWPYTHON)\libs;$(BOOST)\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\zwWorkSRC\2014BinOut\Debug;$(ZWSRC)\2014BinOut\$(Configuration);$(ZWLIB)\MIRACL2014\$(Configuration);$(ZWPYTHON)\libs;$(BOOST)\lib</AdditionalLibraryDirectories>
       <AdditionalDependencies>setupapi.lib;comsuppw.lib;miracl2014.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <ShowProgress>NotSet</ShowProgress>
+      <ShowProgress>LinkVerboseLib</ShowProgress>
       <Profile>true</Profile>
       <ModuleDefinitionFile>jclmsCCB2014.def</ModuleDefinitionFile>
     </Link>
@@ -80,7 +80,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;ZWECIES_EXPORTS;NDEBUG;_WINDOWS;_USRDLL;JCLMSCCB2014_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(ZWSRC)\zwBaseLib\zwBaseLib\Header;$(ZWSRC)\CCBelock\CCBelock\hidCode;$(ZWLIB)\MIRACL2014\MIRACL2014\miraclSrc\include\;.\src\crc32;.\src\cpp3DES;.\src;.\zwECIES;$(ZWSRC)\zwBaseLib\zwBaseLib\HidSplitMsg;$(ZWSRC)\zwBaseLib\zwBaseLib\SecretBox;$(ZWSRC)\jclmsCCB2014\jclmsCCB2014\src\secBox;$(BOOST)\;$(ZWPYTHON)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\zwWorkSRC\jclmsccb14\stm32Test2\zwMiracl;C:\zwWorkSRC\zwBaseLib\zwBaseLib\SecretBox;C:\zwWorkSRC\jclmsccb14\jclmsCCB2014\src\secBox;C:\zwWorkSRC\zwBaseLib\zwBaseLib\HidSplitMsg;$(ZWSRC)\zwBaseLib\zwBaseLib\Header;$(ZWSRC)\CCBelock\CCBelock\hidCode;$(ZWLIB)\MIRACL2014\MIRACL2014\miraclSrc\include\;.\src\crc32;.\src\cpp3DES;.\src;.\zwECIES;$(ZWSRC)\zwBaseLib\zwBaseLib\HidSplitMsg;$(ZWSRC)\zwBaseLib\zwBaseLib\SecretBox;$(ZWSRC)\jclmsCCB2014\jclmsCCB2014\src\secBox;$(BOOST)\;$(ZWPYTHON)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableLanguageExtensions>false</DisableLanguageExtensions>
       <DisableSpecificWarnings>4731;4819</DisableSpecificWarnings>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
@@ -91,8 +91,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <OutputFile>$(ZWSRC)\2014BinOut\$(Configuration)\$(TargetName)$(TargetExt)</OutputFile>
-      <AdditionalLibraryDirectories>$(ZWSRC)\2014BinOut\$(Configuration);$(ZWLIB)\MIRACL2014\$(Configuration);$(ZWPYTHON)\libs;$(BOOST)\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>setupapi.lib;comsuppw.lib;miracl2014.lib;zwBaseLibStatic.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\zwWorkSRC\2014BinOut\Release;$(ZWSRC)\2014BinOut\$(Configuration);$(ZWLIB)\MIRACL2014\$(Configuration);$(ZWPYTHON)\libs;$(BOOST)\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>setupapi.lib;comsuppw.lib;miracl2014.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <Profile>true</Profile>
       <ModuleDefinitionFile>jclmsCCB2014.def</ModuleDefinitionFile>
       <ShowProgress>LinkVerboseLib</ShowProgress>
