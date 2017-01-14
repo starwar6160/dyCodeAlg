@@ -51,7 +51,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;MR_NOASM;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\zwWorkSRC\jclmsccb14\stm32Test2\zwMiracl;C:\zwWorkSRC\jclmsccb14\jclmsCCB2014\zwECIES;$(ZWSRC)\jclmsCCB14\stm32Test2\zwMiracl;$(ZWSRC)\jclmsCCB14\jclmsCCB2014\zwECIES;..\jclmsCCB2014\src;..\jclmsCCB2014\src\cpp3DES</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\zwMiraclMiniCode;C:\zwWorkSRC\jclmsccb14\jclmsCCB2014\zwECIES;$(ZWSRC)\jclmsCCB14\stm32Test2\zwMiracl;$(ZWSRC)\jclmsCCB14\jclmsCCB2014\zwECIES;..\jclmsCCB2014\src;..\jclmsCCB2014\src\cpp3DES</AdditionalIncludeDirectories>
       <DisableLanguageExtensions>true</DisableLanguageExtensions>
       <EnablePREfast>false</EnablePREfast>
     </ClCompile>
@@ -69,7 +69,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;MR_NOASM;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\zwWorkSRC\jclmsccb14\stm32Test2\zwMiracl;C:\zwWorkSRC\jclmsccb14\jclmsCCB2014\zwECIES;$(ZWSRC)\jclmsCCB14\stm32Test2\zwMiracl;$(ZWSRC)\jclmsCCB14\jclmsCCB2014\zwECIES;..\jclmsCCB2014\src;..\jclmsCCB2014\src\cpp3DES</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\zwMiraclMiniCode;C:\zwWorkSRC\jclmsccb14\jclmsCCB2014\zwECIES;$(ZWSRC)\jclmsCCB14\stm32Test2\zwMiracl;$(ZWSRC)\jclmsCCB14\jclmsCCB2014\zwECIES;..\jclmsCCB2014\src;..\jclmsCCB2014\src\cpp3DES</AdditionalIncludeDirectories>
       <DisableLanguageExtensions>true</DisableLanguageExtensions>
     </ClCompile>
     <Link>
@@ -83,12 +83,6 @@
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\jclmsCCB2014\src\cpp3DES\des.cpp" />
-    <ClCompile Include="..\jclmsCCB2014\src\crc32\zwcrc32.c">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="..\jclmsCCB2014\src\jclmsCCB2014AlgCore.cpp" />
     <ClCompile Include="..\jclmsCCB2014\src\zwHtons.c" />
     <ClCompile Include="..\jclmsCCB2014\zwECIES\ecdh.c" />
     <ClCompile Include="..\jclmsCCB2014\zwECIES\octet.c" />
@@ -97,28 +91,78 @@
     <ClCompile Include="..\jclmsCCB2014\zwECIES\sm3_1407.c" />
     <ClCompile Include="..\jclmsCCB2014\zwECIES\zwEcies529.cpp" />
     <ClCompile Include="..\jclmsCCB2014\zwECIES\zwRand201406.cpp" />
+    <ClCompile Include="..\zwMiraclMiniCode\mraes.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\zwMiraclMiniCode\mralloc.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\zwMiraclMiniCode\mrarth0.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\zwMiraclMiniCode\mrarth1.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\zwMiraclMiniCode\mrarth2.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\zwMiraclMiniCode\mrarth3.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\zwMiraclMiniCode\mrbits.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\zwMiraclMiniCode\mrcore.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\zwMiraclMiniCode\mrcurve.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\zwMiraclMiniCode\mrjack.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\zwMiraclMiniCode\mrlucas.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\zwMiraclMiniCode\mrmonty.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\zwMiraclMiniCode\mrshs256.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\zwMiraclMiniCode\mrsroot.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\zwMiraclMiniCode\mrstrong.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\zwMiraclMiniCode\mrxgcd.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="zwECIES\des.cpp" />
+    <ClCompile Include="zwECIES\jclmsCCB2014AlgCore.cpp" />
     <ClCompile Include="zwECIES\stm32Test2.cpp" />
-    <ClCompile Include="zwMiracl\mraes.c" />
-    <ClCompile Include="zwMiracl\mralloc.c" />
-    <ClCompile Include="zwMiracl\mrarth0.c" />
-    <ClCompile Include="zwMiracl\mrarth1.c" />
-    <ClCompile Include="zwMiracl\mrarth2.c" />
-    <ClCompile Include="zwMiracl\mrarth3.c" />
-    <ClCompile Include="zwMiracl\mrbits.c" />
-    <ClCompile Include="zwMiracl\mrcore.c" />
-    <ClCompile Include="zwMiracl\mrcurve.c" />
-    <ClCompile Include="zwMiracl\mrjack.c" />
-    <ClCompile Include="zwMiracl\mrlucas.c" />
-    <ClCompile Include="zwMiracl\mrmonty.c" />
-    <ClCompile Include="zwMiracl\mrshs256.c" />
-    <ClCompile Include="zwMiracl\mrsroot.c" />
-    <ClCompile Include="zwMiracl\mrstrong.c" />
-    <ClCompile Include="zwMiracl\mrxgcd.c" />
+    <ClCompile Include="zwECIES\zwcrc32.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="zwtest318.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\jclmsCCB2014\src\cpp3DES\des.h" />
-    <ClInclude Include="jclmsCCB2014AlgCoreT2.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,3 +1,6 @@
+#ifdef _ZWTEST1202_HDR
+#define _ZWTEST1202_HDR
+
 #include <stdio.h>
 #include <windows.h>
 #include <comutil.h>
@@ -26,5 +29,5 @@ int zwLoadExtEXE( const char *exePathName,const char *exeCmdLine )
 	return 0;
 }
 
-
+#endif _ZWTEST1202_HDR
 
