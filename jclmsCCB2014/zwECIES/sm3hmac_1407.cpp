@@ -2,7 +2,6 @@
 #include <cassert>
 #include <cstring>
 #include "sm3.h"
-#include "jclmsCCB2014.h"
 using namespace std;
 typedef unsigned char BYTE;
 

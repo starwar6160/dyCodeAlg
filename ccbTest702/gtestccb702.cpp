@@ -427,7 +427,7 @@ namespace CcbV11Test722Ecies {
 		printf("INFO1210:\n%s\n",zwMergePsk("aaaaaaaaaa"));
 	}
 
-
+#ifdef _USEYB714TEST
 	void yb714Test(const char *ybinput)
 	{	
 		const int ybLen=strlen(ybinput);
@@ -458,7 +458,7 @@ namespace CcbV11Test722Ecies {
 		yb714Test("YinBaoMsg714.1721.data1.1");
 	}
 
-
+#endif _USEYB714TEST
 
 //////////////////////////////////////////////////////////////////////////
 }				//namespace ccbtest722{

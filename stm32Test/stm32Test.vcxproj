@@ -50,7 +50,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_ZWUSE_AS_JNI;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(ZWLIB)\MIRACL2014\MIRACL2014\miraclSrc\include\;$(ZWSRC)\jclmsCCB14\jclmsCCB2014\zwECIES;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\zwMiraclMiniCode;$(SolutionDir)\jclmsCCB2014\src;$(ZWSRC)\jclmsCCB14\jclmsCCB2014\zwECIES;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -69,7 +69,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;_ZWUSE_AS_JNI;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(ZWLIB)\MIRACL2014\MIRACL2014\miraclSrc\include\;$(ZWSRC)\jclmsCCB14\jclmsCCB2014\zwECIES;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\zwMiraclMiniCode;$(SolutionDir)\jclmsCCB2014\src;$(ZWSRC)\jclmsCCB14\jclmsCCB2014\zwECIES;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

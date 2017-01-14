@@ -13,16 +13,10 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="源文件\zwECIESCopy">
+    <Filter Include="源文件\zwECIESRef">
       <UniqueIdentifier>{7e9ab267-5d99-4774-9648-0e866c363655}</UniqueIdentifier>
     </Filter>
-    <Filter Include="源文件\src">
-      <UniqueIdentifier>{fe34d163-f192-4a10-91d0-b31362e5d6e8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="源文件\zwDycode">
-      <UniqueIdentifier>{baaa7f2e-dc74-44d6-8f26-5fbe4ee4b6ed}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="源文件\zwMiraclMini">
+    <Filter Include="源文件\zwMiraclMiniRef">
       <UniqueIdentifier>{595ba688-8fdd-4101-ac8c-4839b8ae0858}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -30,92 +24,89 @@
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="zwECIES\stm32Test2.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="zwtest318.c">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\jclmsCCB2014\zwECIES\zwEcies529.cpp">
-      <Filter>源文件\zwECIESCopy</Filter>
+      <Filter>源文件\zwECIESRef</Filter>
     </ClCompile>
     <ClCompile Include="..\jclmsCCB2014\zwECIES\zwRand201406.cpp">
-      <Filter>源文件\zwECIESCopy</Filter>
+      <Filter>源文件\zwECIESRef</Filter>
     </ClCompile>
     <ClCompile Include="..\jclmsCCB2014\zwECIES\sm3hmac_1407.cpp">
-      <Filter>源文件\zwECIESCopy</Filter>
+      <Filter>源文件\zwECIESRef</Filter>
     </ClCompile>
     <ClCompile Include="..\jclmsCCB2014\zwECIES\sm3_1407.c">
-      <Filter>源文件\zwECIESCopy</Filter>
+      <Filter>源文件\zwECIESRef</Filter>
     </ClCompile>
     <ClCompile Include="..\jclmsCCB2014\zwECIES\ecdh.c">
-      <Filter>源文件\zwECIESCopy</Filter>
+      <Filter>源文件\zwECIESRef</Filter>
     </ClCompile>
     <ClCompile Include="..\jclmsCCB2014\zwECIES\octet.c">
-      <Filter>源文件\zwECIESCopy</Filter>
+      <Filter>源文件\zwECIESRef</Filter>
     </ClCompile>
     <ClCompile Include="..\jclmsCCB2014\zwECIES\sha2.c">
-      <Filter>源文件\zwECIESCopy</Filter>
+      <Filter>源文件\zwECIESRef</Filter>
     </ClCompile>
     <ClCompile Include="..\jclmsCCB2014\src\zwHtons.c">
-      <Filter>源文件\zwECIESCopy</Filter>
-    </ClCompile>
-    <ClCompile Include="zwECIES\des.cpp">
-      <Filter>源文件\src</Filter>
-    </ClCompile>
-    <ClCompile Include="zwECIES\jclmsCCB2014AlgCore.cpp">
-      <Filter>源文件\zwDycode</Filter>
-    </ClCompile>
-    <ClCompile Include="zwECIES\zwcrc32.c">
-      <Filter>源文件\zwDycode</Filter>
+      <Filter>源文件\zwECIESRef</Filter>
     </ClCompile>
     <ClCompile Include="..\zwMiraclMiniCode\mraes.c">
-      <Filter>源文件\zwMiraclMini</Filter>
+      <Filter>源文件\zwMiraclMiniRef</Filter>
     </ClCompile>
     <ClCompile Include="..\zwMiraclMiniCode\mralloc.c">
-      <Filter>源文件\zwMiraclMini</Filter>
+      <Filter>源文件\zwMiraclMiniRef</Filter>
     </ClCompile>
     <ClCompile Include="..\zwMiraclMiniCode\mrarth0.c">
-      <Filter>源文件\zwMiraclMini</Filter>
+      <Filter>源文件\zwMiraclMiniRef</Filter>
     </ClCompile>
     <ClCompile Include="..\zwMiraclMiniCode\mrarth1.c">
-      <Filter>源文件\zwMiraclMini</Filter>
+      <Filter>源文件\zwMiraclMiniRef</Filter>
     </ClCompile>
     <ClCompile Include="..\zwMiraclMiniCode\mrarth2.c">
-      <Filter>源文件\zwMiraclMini</Filter>
+      <Filter>源文件\zwMiraclMiniRef</Filter>
     </ClCompile>
     <ClCompile Include="..\zwMiraclMiniCode\mrarth3.c">
-      <Filter>源文件\zwMiraclMini</Filter>
+      <Filter>源文件\zwMiraclMiniRef</Filter>
     </ClCompile>
     <ClCompile Include="..\zwMiraclMiniCode\mrbits.c">
-      <Filter>源文件\zwMiraclMini</Filter>
+      <Filter>源文件\zwMiraclMiniRef</Filter>
     </ClCompile>
     <ClCompile Include="..\zwMiraclMiniCode\mrcore.c">
-      <Filter>源文件\zwMiraclMini</Filter>
+      <Filter>源文件\zwMiraclMiniRef</Filter>
     </ClCompile>
     <ClCompile Include="..\zwMiraclMiniCode\mrcurve.c">
-      <Filter>源文件\zwMiraclMini</Filter>
+      <Filter>源文件\zwMiraclMiniRef</Filter>
     </ClCompile>
     <ClCompile Include="..\zwMiraclMiniCode\mrjack.c">
-      <Filter>源文件\zwMiraclMini</Filter>
+      <Filter>源文件\zwMiraclMiniRef</Filter>
     </ClCompile>
     <ClCompile Include="..\zwMiraclMiniCode\mrlucas.c">
-      <Filter>源文件\zwMiraclMini</Filter>
+      <Filter>源文件\zwMiraclMiniRef</Filter>
     </ClCompile>
     <ClCompile Include="..\zwMiraclMiniCode\mrmonty.c">
-      <Filter>源文件\zwMiraclMini</Filter>
+      <Filter>源文件\zwMiraclMiniRef</Filter>
     </ClCompile>
     <ClCompile Include="..\zwMiraclMiniCode\mrshs256.c">
-      <Filter>源文件\zwMiraclMini</Filter>
+      <Filter>源文件\zwMiraclMiniRef</Filter>
     </ClCompile>
     <ClCompile Include="..\zwMiraclMiniCode\mrsroot.c">
-      <Filter>源文件\zwMiraclMini</Filter>
+      <Filter>源文件\zwMiraclMiniRef</Filter>
     </ClCompile>
     <ClCompile Include="..\zwMiraclMiniCode\mrstrong.c">
-      <Filter>源文件\zwMiraclMini</Filter>
+      <Filter>源文件\zwMiraclMiniRef</Filter>
     </ClCompile>
     <ClCompile Include="..\zwMiraclMiniCode\mrxgcd.c">
-      <Filter>源文件\zwMiraclMini</Filter>
+      <Filter>源文件\zwMiraclMiniRef</Filter>
+    </ClCompile>
+    <ClCompile Include="stm32Test2.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zwAlgCommCode\des.cpp">
+      <Filter>源文件\zwECIESRef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zwAlgCommCode\zwcrc32.c">
+      <Filter>源文件\zwECIESRef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zwAlgCommCode\jclmsCCB2014AlgCore.cpp">
+      <Filter>源文件\zwECIESRef</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
