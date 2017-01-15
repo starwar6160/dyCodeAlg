@@ -51,7 +51,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;MR_NOASM;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)\zwMiraclMiniCode;$(SolutionDir)\zwAlgCommCode</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\zwMiraclMiniCode;$(SolutionDir)\zwAlgCommCode;$(SolutionDir)\zw3rdLib</AdditionalIncludeDirectories>
       <DisableLanguageExtensions>true</DisableLanguageExtensions>
       <EnablePREfast>false</EnablePREfast>
     </ClCompile>
@@ -69,7 +69,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;MR_NOASM;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)\zwMiraclMiniCode;$(SolutionDir)\zwAlgCommCode</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\zwMiraclMiniCode;$(SolutionDir)\zwAlgCommCode;$(SolutionDir)\zw3rdLib</AdditionalIncludeDirectories>
       <DisableLanguageExtensions>true</DisableLanguageExtensions>
     </ClCompile>
     <Link>
@@ -83,17 +83,17 @@
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\jclmsCCB2014\src\zwHtons.c" />
-    <ClCompile Include="..\jclmsCCB2014\zwECIES\ecdh.c" />
-    <ClCompile Include="..\jclmsCCB2014\zwECIES\octet.c" />
-    <ClCompile Include="..\jclmsCCB2014\zwECIES\sha2.c" />
-    <ClCompile Include="..\jclmsCCB2014\zwECIES\sm3hmac_1407.cpp" />
-    <ClCompile Include="..\jclmsCCB2014\zwECIES\sm3_1407.c" />
-    <ClCompile Include="..\jclmsCCB2014\zwECIES\zwEcies529.cpp" />
-    <ClCompile Include="..\jclmsCCB2014\zwECIES\zwRand201406.cpp" />
-    <ClCompile Include="..\zwAlgCommCode\des.cpp" />
+    <ClCompile Include="..\zw3rdLib\des.cpp" />
+    <ClCompile Include="..\zw3rdLib\ecdh.c" />
+    <ClCompile Include="..\zw3rdLib\octet.c" />
+    <ClCompile Include="..\zw3rdLib\sha2.c" />
+    <ClCompile Include="..\zw3rdLib\zwcrc32.c" />
     <ClCompile Include="..\zwAlgCommCode\jclmsCCB2014AlgCore.cpp" />
-    <ClCompile Include="..\zwAlgCommCode\zwcrc32.c" />
+    <ClCompile Include="..\zwAlgCommCode\sm3hmac_1407.cpp" />
+    <ClCompile Include="..\zwAlgCommCode\sm3_1407.c" />
+    <ClCompile Include="..\zwAlgCommCode\zwEcies529.cpp" />
+    <ClCompile Include="..\zwAlgCommCode\zwHtons.c" />
+    <ClCompile Include="..\zwAlgCommCode\zwRand201406.cpp" />
     <ClCompile Include="..\zwMiraclMiniCode\mraes.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>

@@ -19,20 +19,17 @@
     <Filter Include="源文件\ECIES">
       <UniqueIdentifier>{08dad2fa-5f52-4ee9-90a7-1e3462674d96}</UniqueIdentifier>
     </Filter>
-    <Filter Include="源文件\src">
-      <UniqueIdentifier>{65922014-8a29-4f56-9c04-e25c270d9292}</UniqueIdentifier>
-    </Filter>
     <Filter Include="源文件\dyCode">
       <UniqueIdentifier>{af4acb87-fe62-4287-a98d-65ed9b6e869d}</UniqueIdentifier>
     </Filter>
     <Filter Include="源文件\secBox">
       <UniqueIdentifier>{4dc8405c-bfcf-4525-bbe9-f36c6db9c1cb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="源文件\3DES">
-      <UniqueIdentifier>{0df26ded-b032-49db-963c-dd8ca0404c72}</UniqueIdentifier>
-    </Filter>
     <Filter Include="源文件\zwMiraclMini">
       <UniqueIdentifier>{95475d9d-462e-4885-8c5c-9b9f90518dcc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Libs">
+      <UniqueIdentifier>{65922014-8a29-4f56-9c04-e25c270d9292}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -40,6 +37,7 @@
     <None Include="jclmsCCB2014.def">
       <Filter>源文件</Filter>
     </None>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -48,23 +46,8 @@
     <ClInclude Include="targetver.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="zwECIES\sm3.h">
-      <Filter>源文件\hashalg</Filter>
-    </ClInclude>
-    <ClInclude Include="src\dCodeHdr.h">
-      <Filter>源文件\dyCode</Filter>
-    </ClInclude>
     <ClInclude Include="src\jclmsCCB2014.h">
       <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\jclmsCCB2014AlgCore.h">
-      <Filter>源文件\dyCode</Filter>
-    </ClInclude>
-    <ClInclude Include="src\cJSON.h">
-      <Filter>源文件\hashalg</Filter>
-    </ClInclude>
-    <ClInclude Include="src\des.h">
-      <Filter>源文件\3DES</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -74,62 +57,8 @@
     <ClCompile Include="dllmain.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="zwECIES\sm3_1407.c">
-      <Filter>源文件\hashalg</Filter>
-    </ClCompile>
-    <ClCompile Include="zwECIES\sm3hmac_1407.cpp">
-      <Filter>源文件\hashalg</Filter>
-    </ClCompile>
-    <ClCompile Include="zwECIES\ecdh.c">
-      <Filter>源文件\ECIES</Filter>
-    </ClCompile>
-    <ClCompile Include="zwECIES\octet.c">
-      <Filter>源文件\ECIES</Filter>
-    </ClCompile>
-    <ClCompile Include="zwECIES\sha2.c">
-      <Filter>源文件\ECIES</Filter>
-    </ClCompile>
-    <ClCompile Include="zwECIES\zwEcies529.cpp">
-      <Filter>源文件\ECIES</Filter>
-    </ClCompile>
-    <ClCompile Include="zwECIES\zwRand201406.cpp">
-      <Filter>源文件\ECIES</Filter>
-    </ClCompile>
-    <ClCompile Include="src\jclmsCCB2014.cpp">
-      <Filter>源文件\dyCode</Filter>
-    </ClCompile>
-    <ClCompile Include="src\dCodeIO.cpp">
-      <Filter>源文件\dyCode</Filter>
-    </ClCompile>
-    <ClCompile Include="src\crc32\zwcrc32.c">
-      <Filter>源文件\hashalg</Filter>
-    </ClCompile>
-    <ClCompile Include="src\crc32\zwCCITTcrc16.c">
-      <Filter>源文件\hashalg</Filter>
-    </ClCompile>
-    <ClCompile Include="src\crc32\adler32.c">
-      <Filter>源文件\hashalg</Filter>
-    </ClCompile>
-    <ClCompile Include="src\zwHtons.c">
-      <Filter>源文件\secBox</Filter>
-    </ClCompile>
-    <ClCompile Include="src\zwTimerS1.cpp">
-      <Filter>源文件\secBox</Filter>
-    </ClCompile>
     <ClCompile Include="src\secBox\zwSecretBoxAuth.c">
       <Filter>源文件\secBox</Filter>
-    </ClCompile>
-    <ClCompile Include="src\secBox\sha1.c">
-      <Filter>源文件\secBox</Filter>
-    </ClCompile>
-    <ClCompile Include="src\jclmsCCB2014AlgCore.cpp">
-      <Filter>源文件\dyCode</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cJSON.c">
-      <Filter>源文件\hashalg</Filter>
-    </ClCompile>
-    <ClCompile Include="src\des.cpp">
-      <Filter>源文件\3DES</Filter>
     </ClCompile>
     <ClCompile Include="..\zwMiraclMiniCode\mraes.c">
       <Filter>源文件\zwMiraclMini</Filter>
@@ -178,6 +107,57 @@
     </ClCompile>
     <ClCompile Include="..\zwMiraclMiniCode\mrxgcd.c">
       <Filter>源文件\zwMiraclMini</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zwAlgCommCode\sm3_1407.c">
+      <Filter>源文件\hashalg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zw3rdLib\ecdh.c">
+      <Filter>源文件\ECIES</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zw3rdLib\octet.c">
+      <Filter>源文件\ECIES</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zwAlgCommCode\zwHtons.c">
+      <Filter>源文件\secBox</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zw3rdLib\cJSON.c">
+      <Filter>源文件\Libs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zwAlgCommCode\zwEcies529.cpp">
+      <Filter>源文件\ECIES</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zwAlgCommCode\zwRand201406.cpp">
+      <Filter>源文件\ECIES</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zwAlgCommCode\zwTimerS1.cpp">
+      <Filter>源文件\secBox</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zwAlgCommCode\jclmsCCB2014AlgCore.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zwAlgCommCode\sm3hmac_1407.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zwAlgCommCode\dCodeIO.cpp">
+      <Filter>源文件\dyCode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zw3rdLib\des.cpp">
+      <Filter>源文件\Libs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zw3rdLib\adler32.c">
+      <Filter>源文件\Libs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zw3rdLib\sha1.c">
+      <Filter>源文件\Libs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zw3rdLib\sha2.c">
+      <Filter>源文件\Libs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zw3rdLib\zwCCITTcrc16.c">
+      <Filter>源文件\Libs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zw3rdLib\zwcrc32.c">
+      <Filter>源文件\Libs</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

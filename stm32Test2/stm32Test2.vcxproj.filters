@@ -24,30 +24,6 @@
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\jclmsCCB2014\zwECIES\zwEcies529.cpp">
-      <Filter>源文件\zwECIESRef</Filter>
-    </ClCompile>
-    <ClCompile Include="..\jclmsCCB2014\zwECIES\zwRand201406.cpp">
-      <Filter>源文件\zwECIESRef</Filter>
-    </ClCompile>
-    <ClCompile Include="..\jclmsCCB2014\zwECIES\sm3hmac_1407.cpp">
-      <Filter>源文件\zwECIESRef</Filter>
-    </ClCompile>
-    <ClCompile Include="..\jclmsCCB2014\zwECIES\sm3_1407.c">
-      <Filter>源文件\zwECIESRef</Filter>
-    </ClCompile>
-    <ClCompile Include="..\jclmsCCB2014\zwECIES\ecdh.c">
-      <Filter>源文件\zwECIESRef</Filter>
-    </ClCompile>
-    <ClCompile Include="..\jclmsCCB2014\zwECIES\octet.c">
-      <Filter>源文件\zwECIESRef</Filter>
-    </ClCompile>
-    <ClCompile Include="..\jclmsCCB2014\zwECIES\sha2.c">
-      <Filter>源文件\zwECIESRef</Filter>
-    </ClCompile>
-    <ClCompile Include="..\jclmsCCB2014\src\zwHtons.c">
-      <Filter>源文件\zwECIESRef</Filter>
-    </ClCompile>
     <ClCompile Include="..\zwMiraclMiniCode\mraes.c">
       <Filter>源文件\zwMiraclMiniRef</Filter>
     </ClCompile>
@@ -99,13 +75,37 @@
     <ClCompile Include="stm32Test2.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\zwAlgCommCode\des.cpp">
-      <Filter>源文件\zwECIESRef</Filter>
-    </ClCompile>
-    <ClCompile Include="..\zwAlgCommCode\zwcrc32.c">
-      <Filter>源文件\zwECIESRef</Filter>
-    </ClCompile>
     <ClCompile Include="..\zwAlgCommCode\jclmsCCB2014AlgCore.cpp">
+      <Filter>源文件\zwECIESRef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zwAlgCommCode\zwRand201406.cpp">
+      <Filter>源文件\zwECIESRef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zw3rdLib\des.cpp">
+      <Filter>源文件\zwECIESRef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zw3rdLib\ecdh.c">
+      <Filter>源文件\zwECIESRef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zw3rdLib\octet.c">
+      <Filter>源文件\zwECIESRef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zw3rdLib\sha2.c">
+      <Filter>源文件\zwECIESRef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zwAlgCommCode\sm3_1407.c">
+      <Filter>源文件\zwECIESRef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zwAlgCommCode\sm3hmac_1407.cpp">
+      <Filter>源文件\zwECIESRef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zw3rdLib\zwcrc32.c">
+      <Filter>源文件\zwECIESRef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zwAlgCommCode\zwEcies529.cpp">
+      <Filter>源文件\zwECIESRef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zwAlgCommCode\zwHtons.c">
       <Filter>源文件\zwECIESRef</Filter>
     </ClCompile>
   </ItemGroup>
