@@ -47,21 +47,6 @@
     <ClCompile Include="gtestLmsHid20141212.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\jclmsCCB2014\zwECIES\zwEcies529.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\jclmsCCB2014\zwECIES\ecdh.c">
-      <Filter>源文件\zwECIESRef</Filter>
-    </ClCompile>
-    <ClCompile Include="..\jclmsCCB2014\zwECIES\octet.c">
-      <Filter>源文件\zwECIESRef</Filter>
-    </ClCompile>
-    <ClCompile Include="..\jclmsCCB2014\zwECIES\zwRand201406.cpp">
-      <Filter>源文件\zwECIESRef</Filter>
-    </ClCompile>
-    <ClCompile Include="..\jclmsCCB2014\zwECIES\sha2.c">
-      <Filter>源文件\zwECIESRef</Filter>
-    </ClCompile>
     <ClCompile Include="..\zwMiraclMiniCode\mraes.c">
       <Filter>源文件\zwMiraclMini</Filter>
     </ClCompile>
@@ -109,6 +94,21 @@
     </ClCompile>
     <ClCompile Include="..\zwMiraclMiniCode\mrxgcd.c">
       <Filter>源文件\zwMiraclMini</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zw3rdLib\ecdh.c">
+      <Filter>源文件\zwECIESRef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zw3rdLib\octet.c">
+      <Filter>源文件\zwECIESRef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zw3rdLib\sha2.c">
+      <Filter>源文件\zwECIESRef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zwAlgCommCode\zwRand201406.cpp">
+      <Filter>源文件\zwECIESRef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zwAlgCommCode\zwEcies529.cpp">
+      <Filter>源文件\zwECIESRef</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

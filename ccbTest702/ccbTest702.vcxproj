@@ -52,15 +52,15 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)\zwMiraclMiniCode;$(SolutionDir)\jclmsCCB2014\src;$(ZWLIB)\MIRACL2014\MIRACL2014\miraclSrc\include\;$(ZWSRC)\jclmsCCB14\jclmsCCB2014\zwECIES;$(ZWSRC)\gtest\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\zwMiraclMiniCode;$(SolutionDir)\zwAlgCommCode;$(SolutionDir)\zw3rdLib;$(SolutionDir)\jclmsCCB2014\src\secBox;$(ZWLIB)\MIRACL2014\MIRACL2014\miraclSrc\include\;$(ZWSRC)\jclmsCCB14\jclmsCCB2014\zwECIES;$(ZWSRC)\gtest\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>jclmsCCB2014.lib;miracl2014.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(ZWSRC)\2014BinOut\$(Configuration)\$(TargetName)$(TargetExt)</OutputFile>
-      <AdditionalLibraryDirectories>$(ZWSRC)\2014BinOut\$(Configuration)\;$(ZWLIB)\gtest\msvc\gtest-md\$(Configuration);$(ZWLIB)\MIRACL2014\$(Configuration)</AdditionalLibraryDirectories>
-      <ShowProgress>NotSet</ShowProgress>
+      <AdditionalLibraryDirectories>$(ZWSRC)\2014BinOut\$(Configuration)\;$(ZWLIB)\gtest\msvc\gtest-md\$(Configuration)</AdditionalLibraryDirectories>
+      <ShowProgress>LinkVerboseLib</ShowProgress>
       <Profile>true</Profile>
     </Link>
   </ItemDefinitionGroup>
@@ -72,7 +72,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)\zwMiraclMiniCode;$(SolutionDir)\jclmsCCB2014\src;$(ZWLIB)\MIRACL2014\MIRACL2014\miraclSrc\include\;$(ZWSRC)\jclmsCCB14\jclmsCCB2014\zwECIES;$(ZWSRC)\gtest\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\zwMiraclMiniCode;$(SolutionDir)\zwAlgCommCode;$(SolutionDir)\zw3rdLib;$(SolutionDir)\jclmsCCB2014\src\secBox;$(ZWLIB)\MIRACL2014\MIRACL2014\miraclSrc\include\;$(ZWSRC)\jclmsCCB14\jclmsCCB2014\zwECIES;$(ZWSRC)\gtest\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -81,8 +81,9 @@
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>jclmsCCB2014.lib;miracl2014.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(ZWSRC)\2014BinOut\$(Configuration)\$(TargetName)$(TargetExt)</OutputFile>
-      <AdditionalLibraryDirectories>$(ZWSRC)\2014BinOut\$(Configuration)\;$(ZWLIB)\gtest\msvc\gtest-md\$(Configuration);$(ZWLIB)\MIRACL2014\$(Configuration)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ZWSRC)\2014BinOut\$(Configuration)\;$(ZWLIB)\gtest\msvc\gtest-md\$(Configuration)</AdditionalLibraryDirectories>
       <Profile>true</Profile>
+      <ShowProgress>LinkVerboseLib</ShowProgress>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -93,23 +94,23 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\jclmsCCB2014\zwECIES\ecdh.c">
+    <ClCompile Include="..\zw3rdLib\ecdh.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="..\jclmsCCB2014\zwECIES\octet.c">
+    <ClCompile Include="..\zw3rdLib\octet.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="..\jclmsCCB2014\zwECIES\sha2.c">
+    <ClCompile Include="..\zw3rdLib\sha2.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="..\jclmsCCB2014\zwECIES\zwEcies529.cpp">
+    <ClCompile Include="..\zwAlgCommCode\zwEcies529.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="..\jclmsCCB2014\zwECIES\zwRand201406.cpp">
+    <ClCompile Include="..\zwAlgCommCode\zwRand201406.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>

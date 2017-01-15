@@ -35,19 +35,19 @@
     <ClCompile Include="stm32Test.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\jclmsCCB2014\zwECIES\zwEcies529.cpp">
+    <ClCompile Include="..\zw3rdLib\ecdh.c">
       <Filter>源文件\ECIES_stm32</Filter>
     </ClCompile>
-    <ClCompile Include="..\jclmsCCB2014\zwECIES\ecdh.c">
+    <ClCompile Include="..\zw3rdLib\octet.c">
       <Filter>源文件\ECIES_stm32</Filter>
     </ClCompile>
-    <ClCompile Include="..\jclmsCCB2014\zwECIES\octet.c">
+    <ClCompile Include="..\zw3rdLib\sha2.c">
       <Filter>源文件\ECIES_stm32</Filter>
     </ClCompile>
-    <ClCompile Include="..\jclmsCCB2014\zwECIES\zwRand201406.cpp">
+    <ClCompile Include="..\zwAlgCommCode\zwEcies529.cpp">
       <Filter>源文件\ECIES_stm32</Filter>
     </ClCompile>
-    <ClCompile Include="..\jclmsCCB2014\zwECIES\sha2.c">
+    <ClCompile Include="..\zwAlgCommCode\zwRand201406.cpp">
       <Filter>源文件\ECIES_stm32</Filter>
     </ClCompile>
   </ItemGroup>
