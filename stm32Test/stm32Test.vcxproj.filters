@@ -16,6 +16,9 @@
     <Filter Include="源文件\ECIES_stm32">
       <UniqueIdentifier>{b10f65bb-a5d1-4343-82f3-eee564d2c611}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\zwMiraclMiniRef">
+      <UniqueIdentifier>{39f5f8e0-d73f-471d-a6d6-83db1880ac5c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -49,6 +52,54 @@
     </ClCompile>
     <ClCompile Include="..\zwAlgCommCode\zwRand201406.cpp">
       <Filter>源文件\ECIES_stm32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zwMiraclMiniCode\mraes.c">
+      <Filter>源文件\zwMiraclMiniRef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zwMiraclMiniCode\mralloc.c">
+      <Filter>源文件\zwMiraclMiniRef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zwMiraclMiniCode\mrarth0.c">
+      <Filter>源文件\zwMiraclMiniRef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zwMiraclMiniCode\mrarth1.c">
+      <Filter>源文件\zwMiraclMiniRef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zwMiraclMiniCode\mrarth2.c">
+      <Filter>源文件\zwMiraclMiniRef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zwMiraclMiniCode\mrarth3.c">
+      <Filter>源文件\zwMiraclMiniRef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zwMiraclMiniCode\mrbits.c">
+      <Filter>源文件\zwMiraclMiniRef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zwMiraclMiniCode\mrcore.c">
+      <Filter>源文件\zwMiraclMiniRef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zwMiraclMiniCode\mrcurve.c">
+      <Filter>源文件\zwMiraclMiniRef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zwMiraclMiniCode\mrjack.c">
+      <Filter>源文件\zwMiraclMiniRef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zwMiraclMiniCode\mrlucas.c">
+      <Filter>源文件\zwMiraclMiniRef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zwMiraclMiniCode\mrmonty.c">
+      <Filter>源文件\zwMiraclMiniRef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zwMiraclMiniCode\mrshs256.c">
+      <Filter>源文件\zwMiraclMiniRef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zwMiraclMiniCode\mrsroot.c">
+      <Filter>源文件\zwMiraclMiniRef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zwMiraclMiniCode\mrstrong.c">
+      <Filter>源文件\zwMiraclMiniRef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zwMiraclMiniCode\mrxgcd.c">
+      <Filter>源文件\zwMiraclMiniRef</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

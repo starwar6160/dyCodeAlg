@@ -4,14 +4,15 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "jclmsCCB2014", "jclmsCCB2014\jclmsCCB2014.vcxproj", "{A062E85F-C9C1-487D-836A-AED01FA97314}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lmsHid", "ccbTest702\ccbTest702.vcxproj", "{7C4BED7C-B62E-45FC-B704-8877A98EBC7B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A062E85F-C9C1-487D-836A-AED01FA97314} = {A062E85F-C9C1-487D-836A-AED01FA97314}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cstest702", "cstest702\cstest702.csproj", "{455FD38A-8C9B-4D04-980C-D531D4879E55}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "jclmsCCBcsLib", "jclmsCCBcsLib\jclmsCCBcsLib.csproj", "{6C9B957B-8742-41B1-BE1B-3E80F9B18583}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "eccRomMaker", "eccRomMaker\eccRomMaker.vcxproj", "{FA1AD826-BA25-45CE-AF19-C27A79C424F7}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cppSecretBoxTest20141215", "cppSecretBoxTest20141023\cppSecretBoxTest20141023.vcxproj", "{C28C2296-B623-49D1-94DC-6510180CDB9C}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "stm32Test", "stm32Test\stm32Test.vcxproj", "{2BBA18CA-6F17-443C-ADB9-9DAC21BF112F}"
 EndProject
@@ -89,18 +90,6 @@ Global
 		{FA1AD826-BA25-45CE-AF19-C27A79C424F7}.Release|Win32.ActiveCfg = Release|Win32
 		{FA1AD826-BA25-45CE-AF19-C27A79C424F7}.Release|Win32.Build.0 = Release|Win32
 		{FA1AD826-BA25-45CE-AF19-C27A79C424F7}.Release|x86.ActiveCfg = Release|Win32
-		{C28C2296-B623-49D1-94DC-6510180CDB9C}.Debug|Any CPU.ActiveCfg = Debug|Win32
-		{C28C2296-B623-49D1-94DC-6510180CDB9C}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
-		{C28C2296-B623-49D1-94DC-6510180CDB9C}.Debug|Mixed Platforms.Build.0 = Debug|Win32
-		{C28C2296-B623-49D1-94DC-6510180CDB9C}.Debug|Win32.ActiveCfg = Debug|Win32
-		{C28C2296-B623-49D1-94DC-6510180CDB9C}.Debug|Win32.Build.0 = Debug|Win32
-		{C28C2296-B623-49D1-94DC-6510180CDB9C}.Debug|x86.ActiveCfg = Debug|Win32
-		{C28C2296-B623-49D1-94DC-6510180CDB9C}.Release|Any CPU.ActiveCfg = Release|Win32
-		{C28C2296-B623-49D1-94DC-6510180CDB9C}.Release|Mixed Platforms.ActiveCfg = Release|Win32
-		{C28C2296-B623-49D1-94DC-6510180CDB9C}.Release|Mixed Platforms.Build.0 = Release|Win32
-		{C28C2296-B623-49D1-94DC-6510180CDB9C}.Release|Win32.ActiveCfg = Release|Win32
-		{C28C2296-B623-49D1-94DC-6510180CDB9C}.Release|Win32.Build.0 = Release|Win32
-		{C28C2296-B623-49D1-94DC-6510180CDB9C}.Release|x86.ActiveCfg = Release|Win32
 		{2BBA18CA-6F17-443C-ADB9-9DAC21BF112F}.Debug|Any CPU.ActiveCfg = Debug|Win32
 		{2BBA18CA-6F17-443C-ADB9-9DAC21BF112F}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
 		{2BBA18CA-6F17-443C-ADB9-9DAC21BF112F}.Debug|Mixed Platforms.Build.0 = Debug|Win32

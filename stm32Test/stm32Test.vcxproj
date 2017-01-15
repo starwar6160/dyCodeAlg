@@ -49,14 +49,14 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_ZWUSE_AS_JNI;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_ZWUSE_AS_JNI;MR_NOASM;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir)\zwMiraclMiniCode;$(SolutionDir)\zwAlgCommCode;$(SolutionDir)\zw3rdLib</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(ZWSRC)\2014BinOut\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>miracl2014.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <ShowProgress>NotSet</ShowProgress>
     </Link>
   </ItemDefinitionGroup>
@@ -68,7 +68,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;_ZWUSE_AS_JNI;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_ZWUSE_AS_JNI;MR_NOASM;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir)\zwMiraclMiniCode;$(SolutionDir)\zwAlgCommCode;$(SolutionDir)\zw3rdLib</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -77,7 +77,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(ZWSRC)\2014BinOut\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>miracl2014.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -93,6 +93,22 @@
     <ClCompile Include="..\zw3rdLib\sha2.c" />
     <ClCompile Include="..\zwAlgCommCode\zwEcies529.cpp" />
     <ClCompile Include="..\zwAlgCommCode\zwRand201406.cpp" />
+    <ClCompile Include="..\zwMiraclMiniCode\mraes.c" />
+    <ClCompile Include="..\zwMiraclMiniCode\mralloc.c" />
+    <ClCompile Include="..\zwMiraclMiniCode\mrarth0.c" />
+    <ClCompile Include="..\zwMiraclMiniCode\mrarth1.c" />
+    <ClCompile Include="..\zwMiraclMiniCode\mrarth2.c" />
+    <ClCompile Include="..\zwMiraclMiniCode\mrarth3.c" />
+    <ClCompile Include="..\zwMiraclMiniCode\mrbits.c" />
+    <ClCompile Include="..\zwMiraclMiniCode\mrcore.c" />
+    <ClCompile Include="..\zwMiraclMiniCode\mrcurve.c" />
+    <ClCompile Include="..\zwMiraclMiniCode\mrjack.c" />
+    <ClCompile Include="..\zwMiraclMiniCode\mrlucas.c" />
+    <ClCompile Include="..\zwMiraclMiniCode\mrmonty.c" />
+    <ClCompile Include="..\zwMiraclMiniCode\mrshs256.c" />
+    <ClCompile Include="..\zwMiraclMiniCode\mrsroot.c" />
+    <ClCompile Include="..\zwMiraclMiniCode\mrstrong.c" />
+    <ClCompile Include="..\zwMiraclMiniCode\mrxgcd.c" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="stm32Test.cpp" />
   </ItemGroup>
